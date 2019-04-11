@@ -1,0 +1,60 @@
+<configuration scan="true" scanPeriod="60 seconds">
+
+    <property name="SERVER" value="chorus.platform"/>
+
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener" />
+
+    <!--console-->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%date [%thread] %-5level %logger - %msg%n</Pattern>
+        </layout>
+    </appender>
+
+    <!--最多保留10个文件，多余的进行zip操作	-->
+    <appender name="Rolling2" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>log/${SERVER}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>log\${SERVER}.%i.log.zip</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>5</maxIndex>
+        </rollingPolicy>
+
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>5MB</maxFileSize>
+        </triggeringPolicy>
+        <encoder>
+            <pattern>>%date [%thread] %-5level %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="analysis" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>log/${SERVER}.analysis.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>log\${SERVER}.analysis.%i.log.zip</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>100</maxIndex>
+        </rollingPolicy>
+
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>100MB</maxFileSize>
+        </triggeringPolicy>
+        <encoder>
+            <pattern>>%date - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--root的级别设置以及启用哪些appender-->
+    <root level="DEBUG">
+        <appender-ref ref="Rolling2"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+    <!-- 下面配置一些第三方包的日志过滤级别，用于避免刷屏 -->
+    <logger name="org.springframework" level="ERROR"/>
+    <logger name="net.sf.oval.internal" level="ERROR" />
+    <logger name="net.sf.json" level="WARN" />
+    <logger name="com.zaxxer.hikari" level="ERROR"/>
+    <logger name="org.jooq" level="ERROR"/>
+    <!---->
+</configuration>

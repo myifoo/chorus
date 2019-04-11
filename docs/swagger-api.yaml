@@ -1,0 +1,202 @@
+swagger: "2.0"
+info:
+  description: "chorus api document"
+  version: "1.0.0"
+  title: "ChorusSystem"
+basePath: "/v2"
+tags:
+- name: "class"
+  description: ""
+- name: "field"
+  description: ""
+- name: "method"
+  description: ""
+- name: "instance"
+  description: ""
+
+
+schemes:
+- "http"
+
+paths:
+  /classes:
+    get:
+      tags:
+      - "class"
+      summary: "get all classes list"
+      description: "get all classes list"
+      operationId: "getClasses"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "return class list"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ItemClass"
+
+        500:
+          description: "System internal error"
+          schema:
+              $ref: '#/definitions/HttpError'
+            
+    post:
+      tags:
+      - "class"
+      summary: "create new item class"
+      description: "create new item class"
+      operationId: "createItemClass"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "class array"
+        required: true
+        schema:
+          type: "array"
+          items:
+            $ref: "#/definitions/MetaClass"
+      responses:
+        200:
+          description: "success"
+            
+        500:
+          description: "System internal error"
+          schema:
+              $ref: '#/definitions/HttpError'
+
+  /fields:
+    get:
+      tags:
+      - "field"
+      summary: "get all fields"
+      description: "get all fields"
+      operationId: "getFields"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "return field list"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ItemField"
+
+        500:
+          description: "System internal error"
+          schema:
+              $ref: '#/definitions/HttpError'
+
+  /methods:
+    get:
+      tags:
+      - "method"
+      summary: "get all methods"
+      description: "get all methods"
+      operationId: "getMethods"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "return field list"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ItemMethod"
+
+        500:
+          description: "System internal error"
+          schema:
+              $ref: '#/definitions/HttpError'
+    
+definitions:
+  HttpError:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      message:
+        type: "string"
+
+  ItemClass:
+    type: "object"
+    properties:
+      cid:
+        type: "integer"
+        format: "int32"
+      package:
+        type: "string"
+      name:
+        type: "string"
+      modifier:
+        type: "string"
+      scope:
+        type: "string"
+      description:
+        type: "string"
+    
+  ItemField:
+    type: "object"
+    properties:
+      fid:
+        type: "integer"
+        format: "int32"
+      name:
+        type: "string"
+      type:
+        type: "string"
+      owner:
+        type: "integer"
+        format: "int32"
+      default:
+        type: "string"
+      unit:
+        type: "string"
+      range:
+        type: "string"
+      optional:
+        type: "boolean"
+      format:
+        type: "string"
+      description:
+        type: "string"
+
+  ItemMethod:
+    type: "object"
+    properties:
+      mid:
+        type: "integer"
+        format: "int32"
+      name:
+        type: "string"
+      result:
+        type: "string"
+      argument:
+        type: "string"
+      owner:
+        type: "integer"
+        format: "int32"
+      description:
+        type: "string"    
+
+  MetaClass:
+    type: "object"
+    properties:
+      class: 
+        $ref: "#/definitions/ItemClass"
+      fields:
+        type: "array"
+        items:
+          $ref: "#/definitions/ItemField"
+      methods:
+        type: "array"
+        items:
+          $ref: "#/definitions/ItemMethod"          
