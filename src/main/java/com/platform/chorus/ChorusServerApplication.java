@@ -11,6 +11,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 import org.springframework.lang.Nullable;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Map;
 import java.util.Objects;
@@ -25,6 +26,7 @@ import java.util.Objects;
  *
  */
 @SpringBootApplication
+@EnableSwagger2
 public class ChorusServerApplication implements ApplicationContextAware
 {
 	//    private static Logger logger = LoggerFactory.getLogger(Server.class);

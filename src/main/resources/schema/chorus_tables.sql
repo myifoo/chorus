@@ -1,3 +1,10 @@
+DROP TABLE public.meta_class;
+DROP TABLE public.meta_field;
+DROP TABLE public.meta_method;
+DROP TABLE public.meta_relation;
+DROP TABLE public.item_instance;
+
+
 CREATE TABLE public.meta_class
 (
     cid SERIAL PRIMARY KEY NOT NULL,                    -- class id
@@ -40,16 +47,17 @@ CREATE TABLE public.meta_relation
 (
     type character varying(20),                         -- extend, derive, has, can, produce, consume, ...
     sid integer,                                        -- source id
-    tid integer,                                        -- target id
+    tid integer                                        -- target id
 );
 
 CREATE TABLE public.item_instance
 (
-    oid integer NOT NULL,                               -- object id
-    type character varying(100) ,                       -- object's class = package + name
+    id SERIAL PRIMARY KEY NOT NULL,                     -- configuration item instance id
+    name character varying(50),                         -- configuration item instance name
+    type character varying(100),                        -- configuration item instance's class = package + name
+    description text,
     content jsonb,
     refs integer[],                                     -- reference object ids
-    tags character varying(20)[],                       -- tags
-    CONSTRAINT ci_p_key PRIMARY KEY (cid)
+    tags character varying(20)[]                        -- tags
 );
 
