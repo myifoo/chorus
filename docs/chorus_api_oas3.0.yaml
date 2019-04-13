@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: ChorusSystem
+  title: ChorusPlatform
   description: chorus api document
   version: 1.0.0
 servers:
@@ -15,7 +15,76 @@ tags:
 - name: item-instance
   description: ""
 paths:
-  /class/{cid}/overview:
+  /class/meta:
+    get:
+      tags:
+      - meta-class
+      summary: get class meta detail by id
+      description: get class meta detail by id
+      operationId: getClassMeta
+      parameters:
+      - name: cid
+        in: query
+        description: ID of class
+        required: true
+        schema:
+          type: integer
+          format: int32
+      
+      responses:
+        200:
+          description: return class meta
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/SuccessResponseBody'
+                - type: object
+                  properties:
+                    result:
+                      $ref: '#/components/schemas/ClassMeta'
+        500:
+          description: System internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+     
+    post:
+      tags:
+      - meta-class
+      summary: create new meta class
+      description: create new meta class
+      operationId: createMetaClass
+      requestBody:
+        description: class array
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClassMeta'
+        required: true
+        
+      responses:
+        200:
+          description: return class cid 
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/SuccessResponseBody'
+                - type: object
+                  properties:
+                    cid:
+                      type: integer
+                      format: int32
+        500:
+          description: System internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody' 
+
+  /class/overview:
     get:
       tags:
       - meta-class
@@ -24,7 +93,7 @@ paths:
       operationId: getClassOverviewById
       parameters:
       - name: cid
-        in: path
+        in: query
         description: ID of class
         required: true
         schema:
@@ -40,8 +109,6 @@ paths:
                 allOf:
                 - $ref: '#/components/schemas/SuccessResponseBody'
                 - type: object
-                  required:
-                  - rootCause
                   properties:
                     result:
                       $ref: '#/components/schemas/ClassMember'
@@ -52,7 +119,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponseBody'
 
-  /classes/overview:
+  /class/overview/list:
     get:
       tags:
       - meta-class
@@ -92,8 +159,6 @@ paths:
                 allOf:
                 - $ref: '#/components/schemas/SuccessResponseBody'
                 - type: object
-                  required:
-                  - rootCause
                   properties:
                     result: 
                       type: array
@@ -113,6 +178,7 @@ paths:
       description: get all meta classes overview  with request body
       operationId: getClassesOverviewWithBody
       requestBody:
+        description: class id list
         content: 
           'application/json':
             schema: 
@@ -120,6 +186,7 @@ paths:
               items:
                 type: integer
                 format: int32
+                
 
       responses:
         200:
@@ -130,8 +197,6 @@ paths:
                 allOf:
                 - $ref: '#/components/schemas/SuccessResponseBody'
                 - type: object
-                  required:
-                  - rootCause
                   properties:
                     result: 
                       type: array
@@ -144,83 +209,166 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponseBody'  
   
-  /classes:
+  /class/meta/list:
     post:
       tags:
       - meta-class
       summary: create new meta class
       description: create new meta class
-      operationId: createMetaClass
+      operationId: createMetaClasses
       requestBody:
         description: class array
         content:
           application/json:
             schema:
-              allOf:
-              - $ref: '#/components/schemas/SuccessResponseBody'
-              - type: object
-                required:
-                - rootCause
-                properties:
-                  result: 
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/MetaClass'
+              type: array
+              items:
+                $ref: '#/components/schemas/ClassMeta'
         required: true
       responses:
         200:
-          description: success
-          content: {}
+          description: return success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponseBody'
+
         500:
           description: System internal error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HttpError'
-  /fields:
+                $ref: '#/components/schemas/ErrorResponseBody'
+  /field/list:
     get:
       tags:
       - meta-field
-      summary: get all fields
-      description: get all fields
+      summary: get all fields by given parameters
+      description: get all fields given parameters
       operationId: getFields
+      parameters:
+      - name: limit
+        in: query
+        description: field number limit
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: field number offset
+        schema:
+          type: integer
+          format: int32
+      - name: owner
+        in: query
+        description: field owner id
+        schema:
+          type: integer
+          format: int32
+      - name: name
+        in: query
+        description: field name string pattern
+        schema:
+          type: string
+      - name: type
+        in: query
+        description: field type = class package + class name  matching pattern string
+        schema:
+          type: string
+      - name: description
+        in: query
+        description: field description matching pattern string
+        schema:
+          type: string
+        
       responses:
         200:
           description: return field list
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/FieldMember'
+                allOf:
+                - $ref: '#/components/schemas/SuccessResponseBody'
+                - type: object
+                  properties:
+                    result: 
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/FieldMember'
         500:
           description: System internal error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HttpError'
+                $ref: '#/components/schemas/ErrorResponseBody'
   /methods:
     get:
       tags:
       - meta-method
-      summary: get all methods
-      description: get all methods
+      summary: get all methods by given parameters
+      description: get all methods by given parameters
       operationId: getMethods
+      parameters:
+      - name: limit
+        in: query
+        description: field number limit
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: field number offset
+        schema:
+          type: integer
+          format: int32
+      - name: owner
+        in: query
+        description: field owner id
+        schema:
+          type: integer
+          format: int32
+      - name: name
+        in: query
+        description: field name string pattern
+        schema:
+          type: string
+      - name: result
+        in: query
+        description: field type = class package + class name  matching pattern string
+        schema:
+          type: string
+      - name: argument
+        in: query
+        description: field description matching pattern string
+        schema:
+          type: string
+      - name: description
+        in: query
+        description: field description matching pattern string
+        schema:
+          type: string    
+      
+        
       responses:
         200:
           description: return field list
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/MethodMember'
+                allOf:
+                - $ref: '#/components/schemas/SuccessResponseBody'
+                - type: object
+                  properties:
+                    result: 
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/FieldMember'
         500:
           description: System internal error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HttpError'
+                $ref: '#/components/schemas/ErrorResponseBody'
 components:
   schemas:
     ClassMember:
@@ -239,7 +387,7 @@ components:
           type: string
         description:
           type: string
-    MetaClass:
+    ClassMeta:
       type: object
       properties:
         class:
