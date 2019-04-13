@@ -5,13 +5,13 @@ info:
   title: "ChorusSystem"
 basePath: "/v2"
 tags:
-- name: "class"
+- name: "meta-class"
   description: ""
-- name: "field"
+- name: "meta-field"
   description: ""
-- name: "method"
+- name: "meta-method"
   description: ""
-- name: "instance"
+- name: "item-instance"
   description: ""
 
 
@@ -22,7 +22,7 @@ paths:
   /classes:
     get:
       tags:
-      - "class"
+      - "meta-class"
       summary: "get all classes list"
       description: "get all classes list"
       operationId: "getClasses"
@@ -44,7 +44,7 @@ paths:
             
     post:
       tags:
-      - "class"
+      - "meta-class"
       summary: "create new item class"
       description: "create new item class"
       operationId: "createItemClass"
@@ -73,7 +73,7 @@ paths:
   /fields:
     get:
       tags:
-      - "field"
+      - "meta-field"
       summary: "get all fields"
       description: "get all fields"
       operationId: "getFields"
@@ -96,7 +96,7 @@ paths:
   /methods:
     get:
       tags:
-      - "method"
+      - "meta-method"
       summary: "get all methods"
       description: "get all methods"
       operationId: "getMethods"
@@ -117,6 +117,24 @@ paths:
               $ref: '#/definitions/HttpError'
     
 definitions:
+  ResponseBody:
+    type: "object"
+    properties:
+      message:
+        type: string
+    
+  ResonseError:
+    allof:
+      $ref: "#/definitions/ResponseBody"
+      type: "object"
+      properties:
+        code:
+          type: integer
+          format: int32
+        cause:
+          type: string
+          
+    
   HttpError:
     type: "object"
     properties:
