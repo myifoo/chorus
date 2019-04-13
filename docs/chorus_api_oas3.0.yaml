@@ -12,7 +12,7 @@ tags:
   description: ""
 - name: meta-method
   description: ""
-- name: item-instance
+- name: instance
   description: ""
 paths:
   /class/meta:
@@ -362,13 +362,137 @@ paths:
                     result: 
                       type: array
                       items:
-                        $ref: '#/components/schemas/FieldMember'
+                        $ref: '#/components/schemas/MethodMember'
         500:
           description: System internal error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponseBody'
+                
+
+  /instance:
+    get:
+      tags:
+      - instance
+      summary: get class overview by id
+      description: get class overview by id
+      operationId: getInstance
+      parameters:
+      - name: id
+        in: query
+        description: ID of class
+        required: true
+        schema:
+          type: integer
+          format: int32
+      
+      responses:
+        200:
+          description: return class list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponseBody'
+        500:
+          description: System internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+    post:
+      tags:
+      - instance
+      summary: create instance
+      description: create instance
+      operationId: createInstance
+      requestBody:
+        description: instance content
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Instance'
+        required: true
+            
+      responses:
+        200:
+          description: return class list
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/SuccessResponseBody'
+                - type: object
+                  properties:
+                    result:
+                      $ref: '#/components/schemas/Instance'
+        500:
+          description: System internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+      
+                
+  /instance/list:
+    get:
+      tags:
+      - instance
+      summary: get class overview by given parameters
+      description: get class overview by by given parameters
+      operationId: getInstanceByParameters
+      parameters:
+      - name: limit
+        in: query
+        description: class number limit
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: class number offset
+        schema:
+          type: integer
+          format: int32
+      - name: name
+        in: query
+        description: class name string pattern
+        schema:
+          type: string
+      - name: type
+        in: query
+        description: class type string pattern
+        schema:
+          type: string
+      - name: content
+        in: query
+        description: class type string pattern
+        schema:
+          type: string
+        
+      
+      responses:
+        200:
+          description: return class list
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/SuccessResponseBody'
+                - type: object
+                  properties:
+                    result:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Instance'
+        500:
+          description: System internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'            
 components:
   schemas:
     ClassMember:
@@ -442,13 +566,19 @@ components:
           type: string
         description:
           type: string
-    HttpError:
+    Instance:
       type: object
       properties:
-        code:
+        oid:
           type: integer
           format: int32
-        message:
+        name:
+          type: string
+        type:
+          type: string
+        content:
+          type: string
+        tags:
           type: string
     ResponseBody:
       type: object
