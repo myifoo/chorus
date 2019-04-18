@@ -4,11 +4,12 @@
 package com.platform.chorus.database;
 
 
-import com.platform.chorus.database.tables.ItemInstance;
-import com.platform.chorus.database.tables.MetaClass;
-import com.platform.chorus.database.tables.MetaField;
-import com.platform.chorus.database.tables.MetaMethod;
-import com.platform.chorus.database.tables.MetaRelation;
+import com.platform.chorus.database.tables.ClassModel;
+import com.platform.chorus.database.tables.Collector;
+import com.platform.chorus.database.tables.Entity;
+import com.platform.chorus.database.tables.FieldModel;
+import com.platform.chorus.database.tables.Relationship;
+import com.platform.chorus.database.tables.Value;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,7 +35,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Public extends SchemaImpl {
 
-    private static final long serialVersionUID = 670583556;
+    private static final long serialVersionUID = -43298080;
 
     /**
      * The reference instance of <code>public</code>
@@ -42,29 +43,34 @@ public class Public extends SchemaImpl {
     public static final Public PUBLIC = new Public();
 
     /**
-     * The table <code>public.item_instance</code>.
+     * The table <code>public.class_model</code>.
      */
-    public final ItemInstance ITEM_INSTANCE = com.platform.chorus.database.tables.ItemInstance.ITEM_INSTANCE;
+    public final ClassModel CLASS_MODEL = com.platform.chorus.database.tables.ClassModel.CLASS_MODEL;
 
     /**
-     * The table <code>public.meta_class</code>.
+     * The table <code>public.collector</code>.
      */
-    public final MetaClass META_CLASS = com.platform.chorus.database.tables.MetaClass.META_CLASS;
+    public final Collector COLLECTOR = com.platform.chorus.database.tables.Collector.COLLECTOR;
 
     /**
-     * The table <code>public.meta_field</code>.
+     * The table <code>public.entity</code>.
      */
-    public final MetaField META_FIELD = com.platform.chorus.database.tables.MetaField.META_FIELD;
+    public final Entity ENTITY = com.platform.chorus.database.tables.Entity.ENTITY;
 
     /**
-     * The table <code>public.meta_method</code>.
+     * The table <code>public.field_model</code>.
      */
-    public final MetaMethod META_METHOD = com.platform.chorus.database.tables.MetaMethod.META_METHOD;
+    public final FieldModel FIELD_MODEL = com.platform.chorus.database.tables.FieldModel.FIELD_MODEL;
 
     /**
-     * The table <code>public.meta_relation</code>.
+     * The table <code>public.relationship</code>.
      */
-    public final MetaRelation META_RELATION = com.platform.chorus.database.tables.MetaRelation.META_RELATION;
+    public final Relationship RELATIONSHIP = com.platform.chorus.database.tables.Relationship.RELATIONSHIP;
+
+    /**
+     * The table <code>public.value</code>.
+     */
+    public final Value VALUE = com.platform.chorus.database.tables.Value.VALUE;
 
     /**
      * No further instances allowed
@@ -91,10 +97,11 @@ public class Public extends SchemaImpl {
 
     private final List<Table<?>> getTables0() {
         return Arrays.<Table<?>>asList(
-            ItemInstance.ITEM_INSTANCE,
-            MetaClass.META_CLASS,
-            MetaField.META_FIELD,
-            MetaMethod.META_METHOD,
-            MetaRelation.META_RELATION);
+            ClassModel.CLASS_MODEL,
+            Collector.COLLECTOR,
+            Entity.ENTITY,
+            FieldModel.FIELD_MODEL,
+            Relationship.RELATIONSHIP,
+            Value.VALUE);
     }
 }

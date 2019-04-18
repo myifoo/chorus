@@ -4,11 +4,12 @@
 package com.platform.chorus.database;
 
 
-import com.platform.chorus.database.tables.ItemInstance;
-import com.platform.chorus.database.tables.MetaClass;
-import com.platform.chorus.database.tables.MetaField;
-import com.platform.chorus.database.tables.MetaMethod;
-import com.platform.chorus.database.tables.MetaRelation;
+import com.platform.chorus.database.tables.ClassModel;
+import com.platform.chorus.database.tables.Collector;
+import com.platform.chorus.database.tables.Entity;
+import com.platform.chorus.database.tables.FieldModel;
+import com.platform.chorus.database.tables.Relationship;
+import com.platform.chorus.database.tables.Value;
 
 import javax.annotation.Generated;
 
@@ -27,27 +28,32 @@ import javax.annotation.Generated;
 public class Tables {
 
     /**
-     * The table <code>public.item_instance</code>.
+     * The table <code>public.class_model</code>.
      */
-    public static final ItemInstance ITEM_INSTANCE = com.platform.chorus.database.tables.ItemInstance.ITEM_INSTANCE;
+    public static final ClassModel CLASS_MODEL = com.platform.chorus.database.tables.ClassModel.CLASS_MODEL;
 
     /**
-     * The table <code>public.meta_class</code>.
+     * The table <code>public.collector</code>.
      */
-    public static final MetaClass META_CLASS = com.platform.chorus.database.tables.MetaClass.META_CLASS;
+    public static final Collector COLLECTOR = com.platform.chorus.database.tables.Collector.COLLECTOR;
 
     /**
-     * The table <code>public.meta_field</code>.
+     * The table <code>public.entity</code>.
      */
-    public static final MetaField META_FIELD = com.platform.chorus.database.tables.MetaField.META_FIELD;
+    public static final Entity ENTITY = com.platform.chorus.database.tables.Entity.ENTITY;
 
     /**
-     * The table <code>public.meta_method</code>.
+     * The table <code>public.field_model</code>.
      */
-    public static final MetaMethod META_METHOD = com.platform.chorus.database.tables.MetaMethod.META_METHOD;
+    public static final FieldModel FIELD_MODEL = com.platform.chorus.database.tables.FieldModel.FIELD_MODEL;
 
     /**
-     * The table <code>public.meta_relation</code>.
+     * The table <code>public.relationship</code>.
      */
-    public static final MetaRelation META_RELATION = com.platform.chorus.database.tables.MetaRelation.META_RELATION;
+    public static final Relationship RELATIONSHIP = com.platform.chorus.database.tables.Relationship.RELATIONSHIP;
+
+    /**
+     * The table <code>public.value</code>.
+     */
+    public static final Value VALUE = com.platform.chorus.database.tables.Value.VALUE;
 }

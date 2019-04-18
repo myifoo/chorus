@@ -22,6 +22,12 @@ public class ErrorResponseBody extends ResponseBody  {
     return this;
   }
 
+  public ErrorResponseBody(Integer code, String message, String cause) {
+    this.cause = cause;
+    this.code = code;
+    this.setMessage(message);
+  }
+
   /**
    * Get cause
    * @return cause

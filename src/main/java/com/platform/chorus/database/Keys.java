@@ -4,14 +4,16 @@
 package com.platform.chorus.database;
 
 
-import com.platform.chorus.database.tables.ItemInstance;
-import com.platform.chorus.database.tables.MetaClass;
-import com.platform.chorus.database.tables.MetaField;
-import com.platform.chorus.database.tables.MetaMethod;
-import com.platform.chorus.database.tables.records.ItemInstanceRecord;
-import com.platform.chorus.database.tables.records.MetaClassRecord;
-import com.platform.chorus.database.tables.records.MetaFieldRecord;
-import com.platform.chorus.database.tables.records.MetaMethodRecord;
+import com.platform.chorus.database.tables.ClassModel;
+import com.platform.chorus.database.tables.Collector;
+import com.platform.chorus.database.tables.Entity;
+import com.platform.chorus.database.tables.FieldModel;
+import com.platform.chorus.database.tables.Value;
+import com.platform.chorus.database.tables.records.ClassModelRecord;
+import com.platform.chorus.database.tables.records.CollectorRecord;
+import com.platform.chorus.database.tables.records.EntityRecord;
+import com.platform.chorus.database.tables.records.FieldModelRecord;
+import com.platform.chorus.database.tables.records.ValueRecord;
 
 import javax.annotation.Generated;
 
@@ -38,22 +40,22 @@ public class Keys {
     // IDENTITY definitions
     // -------------------------------------------------------------------------
 
-    public static final Identity<ItemInstanceRecord, Integer> IDENTITY_ITEM_INSTANCE = Identities0.IDENTITY_ITEM_INSTANCE;
-    public static final Identity<MetaClassRecord, Integer> IDENTITY_META_CLASS = Identities0.IDENTITY_META_CLASS;
-    public static final Identity<MetaFieldRecord, Integer> IDENTITY_META_FIELD = Identities0.IDENTITY_META_FIELD;
-    public static final Identity<MetaMethodRecord, Integer> IDENTITY_META_METHOD = Identities0.IDENTITY_META_METHOD;
+    public static final Identity<ClassModelRecord, Integer> IDENTITY_CLASS_MODEL = Identities0.IDENTITY_CLASS_MODEL;
+    public static final Identity<EntityRecord, Integer> IDENTITY_ENTITY = Identities0.IDENTITY_ENTITY;
+    public static final Identity<FieldModelRecord, Integer> IDENTITY_FIELD_MODEL = Identities0.IDENTITY_FIELD_MODEL;
+    public static final Identity<ValueRecord, Integer> IDENTITY_VALUE = Identities0.IDENTITY_VALUE;
 
     // -------------------------------------------------------------------------
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final UniqueKey<ItemInstanceRecord> CI_OBJECTS_PKEY = UniqueKeys0.CI_OBJECTS_PKEY;
-    public static final UniqueKey<MetaClassRecord> META_CLASSES_PKEY = UniqueKeys0.META_CLASSES_PKEY;
-    public static final UniqueKey<MetaClassRecord> CL_U_KEY = UniqueKeys0.CL_U_KEY;
-    public static final UniqueKey<MetaFieldRecord> META_FIELDS_PKEY = UniqueKeys0.META_FIELDS_PKEY;
-    public static final UniqueKey<MetaFieldRecord> FD_U_KEY = UniqueKeys0.FD_U_KEY;
-    public static final UniqueKey<MetaMethodRecord> META_METHODS_PKEY = UniqueKeys0.META_METHODS_PKEY;
-    public static final UniqueKey<MetaMethodRecord> MT_U_KEY = UniqueKeys0.MT_U_KEY;
+    public static final UniqueKey<ClassModelRecord> CLASS_MODEL_PKEY = UniqueKeys0.CLASS_MODEL_PKEY;
+    public static final UniqueKey<ClassModelRecord> CL_U_KEY = UniqueKeys0.CL_U_KEY;
+    public static final UniqueKey<CollectorRecord> COLLECTOR_PKEY = UniqueKeys0.COLLECTOR_PKEY;
+    public static final UniqueKey<EntityRecord> ENTITY_PKEY = UniqueKeys0.ENTITY_PKEY;
+    public static final UniqueKey<FieldModelRecord> FIELD_MODEL_PKEY = UniqueKeys0.FIELD_MODEL_PKEY;
+    public static final UniqueKey<FieldModelRecord> FD_U_KEY = UniqueKeys0.FD_U_KEY;
+    public static final UniqueKey<ValueRecord> VALUE_PKEY = UniqueKeys0.VALUE_PKEY;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
@@ -65,19 +67,19 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     private static class Identities0 {
-        public static Identity<ItemInstanceRecord, Integer> IDENTITY_ITEM_INSTANCE = Internal.createIdentity(ItemInstance.ITEM_INSTANCE, ItemInstance.ITEM_INSTANCE.OID);
-        public static Identity<MetaClassRecord, Integer> IDENTITY_META_CLASS = Internal.createIdentity(MetaClass.META_CLASS, MetaClass.META_CLASS.CID);
-        public static Identity<MetaFieldRecord, Integer> IDENTITY_META_FIELD = Internal.createIdentity(MetaField.META_FIELD, MetaField.META_FIELD.FID);
-        public static Identity<MetaMethodRecord, Integer> IDENTITY_META_METHOD = Internal.createIdentity(MetaMethod.META_METHOD, MetaMethod.META_METHOD.MID);
+        public static Identity<ClassModelRecord, Integer> IDENTITY_CLASS_MODEL = Internal.createIdentity(ClassModel.CLASS_MODEL, ClassModel.CLASS_MODEL.ID);
+        public static Identity<EntityRecord, Integer> IDENTITY_ENTITY = Internal.createIdentity(Entity.ENTITY, Entity.ENTITY.ID);
+        public static Identity<FieldModelRecord, Integer> IDENTITY_FIELD_MODEL = Internal.createIdentity(FieldModel.FIELD_MODEL, FieldModel.FIELD_MODEL.ID);
+        public static Identity<ValueRecord, Integer> IDENTITY_VALUE = Internal.createIdentity(Value.VALUE, Value.VALUE.OWNER);
     }
 
     private static class UniqueKeys0 {
-        public static final UniqueKey<ItemInstanceRecord> CI_OBJECTS_PKEY = Internal.createUniqueKey(ItemInstance.ITEM_INSTANCE, "ci_objects_pkey", ItemInstance.ITEM_INSTANCE.OID);
-        public static final UniqueKey<MetaClassRecord> META_CLASSES_PKEY = Internal.createUniqueKey(MetaClass.META_CLASS, "meta_classes_pkey", MetaClass.META_CLASS.CID);
-        public static final UniqueKey<MetaClassRecord> CL_U_KEY = Internal.createUniqueKey(MetaClass.META_CLASS, "cl_u_key", MetaClass.META_CLASS.PACKAGE, MetaClass.META_CLASS.NAME);
-        public static final UniqueKey<MetaFieldRecord> META_FIELDS_PKEY = Internal.createUniqueKey(MetaField.META_FIELD, "meta_fields_pkey", MetaField.META_FIELD.FID);
-        public static final UniqueKey<MetaFieldRecord> FD_U_KEY = Internal.createUniqueKey(MetaField.META_FIELD, "fd_u_key", MetaField.META_FIELD.OWNER, MetaField.META_FIELD.NAME);
-        public static final UniqueKey<MetaMethodRecord> META_METHODS_PKEY = Internal.createUniqueKey(MetaMethod.META_METHOD, "meta_methods_pkey", MetaMethod.META_METHOD.MID);
-        public static final UniqueKey<MetaMethodRecord> MT_U_KEY = Internal.createUniqueKey(MetaMethod.META_METHOD, "mt_u_key", MetaMethod.META_METHOD.OWNER, MetaMethod.META_METHOD.NAME);
+        public static final UniqueKey<ClassModelRecord> CLASS_MODEL_PKEY = Internal.createUniqueKey(ClassModel.CLASS_MODEL, "class_model_pkey", ClassModel.CLASS_MODEL.ID);
+        public static final UniqueKey<ClassModelRecord> CL_U_KEY = Internal.createUniqueKey(ClassModel.CLASS_MODEL, "cl_u_key", ClassModel.CLASS_MODEL.PACKAGE, ClassModel.CLASS_MODEL.NAME);
+        public static final UniqueKey<CollectorRecord> COLLECTOR_PKEY = Internal.createUniqueKey(Collector.COLLECTOR, "collector_pkey", Collector.COLLECTOR.NAME);
+        public static final UniqueKey<EntityRecord> ENTITY_PKEY = Internal.createUniqueKey(Entity.ENTITY, "entity_pkey", Entity.ENTITY.ID);
+        public static final UniqueKey<FieldModelRecord> FIELD_MODEL_PKEY = Internal.createUniqueKey(FieldModel.FIELD_MODEL, "field_model_pkey", FieldModel.FIELD_MODEL.ID);
+        public static final UniqueKey<FieldModelRecord> FD_U_KEY = Internal.createUniqueKey(FieldModel.FIELD_MODEL, "fd_u_key", FieldModel.FIELD_MODEL.OWNER, FieldModel.FIELD_MODEL.NAME);
+        public static final UniqueKey<ValueRecord> VALUE_PKEY = Internal.createUniqueKey(Value.VALUE, "value_pkey", Value.VALUE.OWNER);
     }
 }
