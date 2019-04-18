@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <script src="static/vue.js"></script>
+    <script src="static/jquery.js"></script>
+    <link rel="stylesheet" href="amaze/assets/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="amaze/assets/css/admin.css">
+    <style type="text/css">
+        table{
+            width: 100%;
+            table-layout: fixed;
+        }
+
+        .table-package{
+            width: 20%;
+        }
+
+        .table-name{
+            width: 10%;
+        }
+
+        .table-label{
+            width: 10%;
+        }
+
+        .table-extend{
+            width: 10%;
+        }
+
+        .table-modifier{
+            width: 10%;
+        }
+
+        .table-scope{
+            width: 10%;
+        }
+
+        .table-description{
+            width: 30%;
+        }
+
+        td{
+            white-space: nowrap;/*控制单行显示*/
+            overflow: hidden;/*超出隐藏*/
+            text-overflow: ellipsis;/*隐藏的字符用省略号表示*/
+        }
+
+    </style>
+</head>
+<body>
+
+<header class="am-topbar am-topbar-inverse admin-header">
+    <div class="am-topbar-brand">
+        <strong>Chorus Admin</strong> <small>管理平台</small>
+    </div>
+</header>
+
+<div class="am-cf admin-main">
+        <!-- content start -->
+    <div class="admin-content">
+        <div class="admin-content-body">
+
+
+            <hr/>
+
+            <div id="class-model-form" class="am-g">
+
+
+                <div class="am-u-sm-8 am-u-lg-4">
+
+                    <section class="am-panel am-panel-default">
+                        <header class="am-panel-hd">
+                            <h3 class="am-panel-title">新增模板类</h3>
+                        </header>
+                        <div class="am-panel-bd">
+
+                            <form class="am-form am-form-horizontal">
+                                <div class="am-form-group">
+                                    <label for="class-package" class="am-u-sm-3 am-form-label"><small>Package</small></label>
+                                    <div class="am-u-sm-9 ">
+                                        <input type="text" id="class-package" v-model="package" class="am-input-sm" placeholder="package">
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <label for="class-name" class="am-u-sm-3 am-form-label"><small>Name</small></label>
+                                    <div class="am-u-sm-9 ">
+                                        <input type="text" id="class-name" v-model="name" class="am-input-sm" placeholder="name" >
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <label for="class-extend" class="am-u-sm-3 am-form-label"><small>Extend</small></label>
+                                    <div class="am-u-sm-9 ">
+                                        <input type="text" id="class-extend" v-model="extend" class="am-input-sm" placeholder="extend" >
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <label for="class-label" class="am-u-sm-3 am-form-label"><small>Label</small></label>
+                                    <div class="am-u-sm-9 ">
+                                        <input type="text" id="class-label" v-model="label" class="am-input-sm" placeholder="label" >
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <label for="class-modifier" class="am-u-sm-3 am-form-label"><small>Modifier</small></label>
+                                    <div class="am-u-sm-9 ">
+                                        <input type="text" id="class-modifier" v-model="modifier" class="am-input-sm" placeholder="modifier" >
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <label for="class-scope" class="am-u-sm-3 am-form-label"><small>Scope</small></label>
+                                    <div class="am-u-sm-9 ">
+                                        <input type="text" id="class-scope" v-model="scope" class="am-input-sm" placeholder="scope" >
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <label for="class-description" class="am-u-sm-3 am-form-label"><small>Description</small></label>
+                                    <div class="am-u-sm-9">
+                                        <textarea class="" rows="5" id="class-description" v-model="description"  placeholder="description"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <div class="am-u-sm-2 am-u-sm-push-3">
+                                        <button type="submit" class="am-btn am-btn-sm am-round" @click="submit">新增</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+
+                </div>
+                <div class="am-u-sm-1 am-u-lg-8">
+                    <form class="am-form">
+                        <table class="am-table am-table-striped am-table-hover table-main am-table-bordered am-table-radius" >
+                            <thead>
+                            <tr>
+                                <th class="table-package">Package</th>
+                                <th class="table-name">Name</th>
+                                <th class="table-label">Label</th>
+                                <th class="table-extend">Extend</th>
+                                <th class="table-modifier">Modifier</th>
+                                <th class="table-scope">Scope</th>
+                                <th class="table-description">Description</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="record in records">
+                                <td>{{record.package}}</td>
+                                <td class="am-primary">{{record.name}}</td>
+                                <td>{{record.label}}</td>
+                                <td>{{record.extend}}</td>
+                                <td>{{record.modifier}}</td>
+                                <td>{{record.scope}}</td>
+                                <td>{{record.description}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <footer class="admin-content-footer">
+            <hr>
+            <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+        </footer>
+
+    </div>
+    <!-- content end -->
+
+</div>
+
+<a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+
+<footer>
+    <hr>
+    <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+</footer>
+
+<script src="amaze/assets/js/amazeui.min.js"></script>
+<script src="amaze/assets/js/app.js"></script>
+
+<script  type="text/javascript">
+    var classModelApp = new Vue({
+        el: '#class-model-form',
+        data: {
+            model: {
+                package: '',
+                name: '',
+                extend: '',
+                label: '',
+                modifier: '',
+                scope: '',
+                description: ''
+            },
+            records:[
+                {
+                    package: 'chorus.host',
+                    name: 'LinuxServer',
+                    extend: 'chorus.Host',
+                    label: '测试1号',
+                    modifier: '',
+                    scope: 'global',
+                    description: 'this is a demo'
+                },
+                {
+                    package: 'chorus.host',
+                    name: 'LinuxServer',
+                    extend: 'chorus.Host',
+                    label: '测试1号',
+                    modifier: '',
+                    scope: 'global',
+                    description: 'this is a demo'
+                },
+                {
+                    package: 'chorus.host',
+                    name: 'LinuxServer',
+                    extend: 'chorus.Host',
+                    label: '测试1号',
+                    modifier: '',
+                    scope: 'global',
+                    description: 'this is a demo'
+                },
+                {
+                    package: 'chorus.host',
+                    name: 'LinuxServer',
+                    extend: 'chorus.Host',
+                    label: '测试1号',
+                    modifier: '',
+                    scope: 'global',
+                    description: 'this is a demo'
+                }
+            ] ,
+            message: ""
+        },
+        methods: {
+            submit: function(){
+                $.ajax({
+                    url: "/api/v1/model/class",
+                    type: "POST",
+                    data: this.data,
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (result) {
+                        console.log(result["message"])
+                    }
+                })
+
+                debugger;
+            }
+        }
+
+    })
+
+
+
+</script>
+</body>
+</html>

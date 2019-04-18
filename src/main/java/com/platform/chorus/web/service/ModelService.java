@@ -19,6 +19,10 @@ public class ModelService {
         return daoService.save(models);
     }
 
+    public Integer create(ClassModel model) {
+        return daoService.save(model);
+    }
+
     public List<ClassModel> getAllClass() {
         return daoService.getAll();
     }

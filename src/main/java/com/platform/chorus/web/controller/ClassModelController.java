@@ -21,14 +21,26 @@ import java.util.List;
  * Create by A.T on 2019/4/18
  */
 @RestController
-@RequestMapping("/model/class")
+@RequestMapping("/model/")
 public class ClassModelController {
     private static Logger logger = LoggerFactory.getLogger(ClassModelController.class);
 
     @Autowired
     ModelService service;
 
-    @RequestMapping(value = "/", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
+    @RequestMapping(value = "/class", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
+    public ResponseEntity<? extends  ResponseBody> createClass(@RequestBody ClassModel model) {
+        try {
+            SuccessResponseBody response = new SuccessResponseBody();
+            response.setMessage("create single class model success");
+            response.setResult(service.create(model));
+            return new ResponseEntity<>(response, HttpStatus.NOT_IMPLEMENTED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ErrorResponseBody(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), e.getClass().getName()), HttpStatus.NOT_IMPLEMENTED);
+        }
+    }
+
+    @RequestMapping(value = "/classes", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
     public ResponseEntity<? extends  ResponseBody> createClass(@RequestBody List<ClassModel> models) {
         try {
             SuccessResponseBody response = new SuccessResponseBody();
@@ -40,7 +52,7 @@ public class ClassModelController {
         }
     }
 
-    @RequestMapping(value = "/", produces = "application/json", method = RequestMethod.GET)
+    @RequestMapping(value = "/classes", produces = "application/json", method = RequestMethod.GET)
     public ResponseEntity<? extends  ResponseBody> getAllClass() {
         try {
             SuccessResponseBody response = new SuccessResponseBody();
@@ -52,7 +64,7 @@ public class ClassModelController {
         }
     }
 
-    @RequestMapping(value = "/html", produces = "text/html", method = RequestMethod.GET)
+    @RequestMapping(value = "/classes/html", produces = "text/html", method = RequestMethod.GET)
     public String getAllClassHtml() {
         try {
             return service.getClassHtml();
@@ -61,7 +73,7 @@ public class ClassModelController {
         }
     }
 
-    @RequestMapping(value = "/name", produces = "application/json", method = RequestMethod.GET)
+    @RequestMapping(value = "/classes/name", produces = "application/json", method = RequestMethod.GET)
     public ResponseEntity<? extends  ResponseBody> getAllClassFullName() {
         try {
             SuccessResponseBody response = new SuccessResponseBody();
