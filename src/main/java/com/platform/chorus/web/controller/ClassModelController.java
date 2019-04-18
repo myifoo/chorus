@@ -58,7 +58,7 @@ public class ClassModelController {
             SuccessResponseBody response = new SuccessResponseBody();
             response.setMessage("get all class models success");
             response.setResult(service.getAllClass());
-            return new ResponseEntity<>(response, HttpStatus.NOT_IMPLEMENTED);
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new ErrorResponseBody(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), e.getClass().getName()), HttpStatus.NOT_IMPLEMENTED);
         }

@@ -199,44 +199,7 @@
                 scope: '',
                 description: ''
             },
-            records:[
-                {
-                    package: 'chorus.host',
-                    name: 'LinuxServer',
-                    extend: 'chorus.Host',
-                    label: '测试1号',
-                    modifier: '',
-                    scope: 'global',
-                    description: 'this is a demo'
-                },
-                {
-                    package: 'chorus.host',
-                    name: 'LinuxServer',
-                    extend: 'chorus.Host',
-                    label: '测试1号',
-                    modifier: '',
-                    scope: 'global',
-                    description: 'this is a demo'
-                },
-                {
-                    package: 'chorus.host',
-                    name: 'LinuxServer',
-                    extend: 'chorus.Host',
-                    label: '测试1号',
-                    modifier: '',
-                    scope: 'global',
-                    description: 'this is a demo'
-                },
-                {
-                    package: 'chorus.host',
-                    name: 'LinuxServer',
-                    extend: 'chorus.Host',
-                    label: '测试1号',
-                    modifier: '',
-                    scope: 'global',
-                    description: 'this is a demo'
-                }
-            ] ,
+            records: [],
             message: ""
         },
         methods: {
@@ -257,6 +220,16 @@
         }
 
     })
+
+    $.ajax({
+        url: "/api/v1/model/classes",
+        type: "GET",
+        dataType: "json",
+        success: function (response) {
+            classModelApp.records = response["result"]
+        }
+    })
+
 
 
 
