@@ -1,6 +1,6 @@
 package com.platform.chorus;
 
-import com.platform.chorus.database.utils.PgsqlSchemaTool;
+import com.platform.chorus.db.utils.PgsqlSchemaTool;
 import org.apache.commons.cli.*;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.Banner;
@@ -8,12 +8,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
-import org.springframework.lang.Nullable;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -44,11 +41,11 @@ public class ChorusServerApplication implements ApplicationContextAware
 				.append("\n\n")
 				.append(spaces).append("-h -help       :  Print this usage information\n")
 				.append(spaces).append("-m -mode       :  Server mode, such as [ web, test, all ]\n")
-				.append(spaces).append("-d -db         :  database command line tools, such as [ init, clear, refresh, migrate]\n")
-				.append(spaces).append("-u             :  database username, required when execute db command\n")
-				.append(spaces).append("-p             :  database password, required when execute db command\n")
-				.append(spaces).append("-ip            :  database ip, required when execute db command\n")
-				.append(spaces).append("-port          :  database port, required when execute db command\n");
+				.append(spaces).append("-d -db         :  db command line tools, such as [ init, clear, refresh, migrate]\n")
+				.append(spaces).append("-u             :  db username, required when execute db command\n")
+				.append(spaces).append("-p             :  db password, required when execute db command\n")
+				.append(spaces).append("-ip            :  db ip, required when execute db command\n")
+				.append(spaces).append("-port          :  db port, required when execute db command\n");
 
 		System.out.println(usage.toString());
 		System.exit(0);
@@ -61,11 +58,11 @@ public class ChorusServerApplication implements ApplicationContextAware
 
 		options.addOption("h", "help", false, "Print usage information");
 		options.addOption("m", "mode", true, "Server mode: [ model, test, all ]");
-		options.addOption("d", "db", true, "database command line tools: [ init, clear, refresh, migrate]");
-		options.addOption("u", "username", true, "database username");
-		options.addOption("p", "password", true, "database password");
-		options.addOption("ip", true, "database ip");
-		options.addOption("port", true, "database port");
+		options.addOption("d", "db", true, "db command line tools: [ init, clear, refresh, migrate]");
+		options.addOption("u", "username", true, "db username");
+		options.addOption("p", "password", true, "db password");
+		options.addOption("ip", true, "db ip");
+		options.addOption("port", true, "db port");
 
 		try {
 			cmd = parser.parse(options, args);

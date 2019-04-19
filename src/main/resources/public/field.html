@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <script src="static/vue.js"></script>
+    <script src="static/jquery.js"></script>
+    <link rel="stylesheet" href="amaze/assets/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="amaze/assets/css/admin.css">
+    <style type="text/css">
+        table{
+            width: 100%;
+            table-layout: fixed;
+        }
+
+        .table-owner{
+            width: 7%;
+        }
+
+        .table-name{
+            width: 7%;
+        }
+
+        .table-label{
+            width: 7%;
+        }
+
+        .table-class{
+            width: 7%;
+        }
+
+        .table-unit{
+            width: 7%;
+        }
+
+        .table-range{
+            width: 7%;
+        }
+
+        .table-default{
+            width: 7%;
+        }
+
+        .table-format{
+            width: 7%;
+        }
+
+        .table-optional{
+            width: 7%;
+        }
+
+        .table-configurable {
+            width: 7%;
+        }
+
+        .table-configurable{
+            width: 7%;
+        }
+
+        .table-collector{
+            width: 7%;
+        }
+
+        .table-interval{
+            width: 7%;
+        }
+
+        .table-description{
+            width: 9%;
+        }
+
+        td{
+            white-space: nowrap;/*控制单行显示*/
+            overflow: hidden;/*超出隐藏*/
+            text-overflow: ellipsis;/*隐藏的字符用省略号表示*/
+        }
+
+    </style>
+</head>
+<body>
+
+<header class="am-topbar am-topbar-inverse admin-header">
+    <div class="am-topbar-brand">
+        <strong>Chorus Admin</strong> <small>管理平台</small>
+    </div>
+</header>
+
+<div class="am-cf admin-main">
+        <!-- content start -->
+    <div class="admin-content">
+        <div class="admin-content-body">
+            <hr/>
+
+            <div class="am-u-lg-12">
+
+                <section class="am-panel am-panel-default">
+                    <header class="am-panel-hd">
+                        <h3 class="am-panel-title">新增模板字段</h3>
+                    </header>
+                    <div id="field-model-form" class="am-panel-bd">
+
+                        <div class="am-g am-form">
+                            <div class="am-u-sm-4">
+                                <form class="am-form am-form-horizontal">
+                                    <div class="am-form-group">
+                                        <label for="class-owner" class="am-u-sm-3 am-form-label"><small>Owner</small></label>
+                                        <div class="am-u-sm-9 ">
+                                            <select id="class-owner" v-model="model.owner" name="owner" class="am-input-sm" placeholder="package+class">
+                                                <option v-for="name in classNames" >{{name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="am-form-group">
+                                        <label for="class-class" class="am-u-sm-3 am-form-label"><small>Class</small></label>
+                                        <div class="am-u-sm-9 ">
+                                            <select id="class-class" v-model="model.class" name="class" class="am-input-sm" placeholder="class">
+                                                <option v-for="name in classes" >{{name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="am-form-group">
+                                        <label for="class-default" class="am-u-sm-3 am-form-label"><small>Default</small></label>
+                                        <div class="am-u-sm-9 ">
+                                            <input type="text" id="class-default" v-model="model.default" class="am-input-sm" placeholder="default">
+                                        </div>
+                                    </div>
+
+                                    <div class="am-form-group">
+                                        <label for="class-configurable" class="am-u-sm-3 am-form-label"><small>Configurable</small></label>
+                                        <div class="am-u-sm-9 ">
+                                            <input type="text" id="class-configurable" v-model="model.configurable" class="am-input-sm" placeholder="configurable">
+                                        </div>
+                                    </div>
+
+                                    <div class="am-form-group">
+                                        <label for="class-interval" class="am-u-sm-3 am-form-label"><small>Interval</small></label>
+                                        <div class="am-u-sm-9 ">
+                                            <input type="text" id="class-interval" v-model="model.interval" class="am-input-sm" placeholder="interval">
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                            <div class="am-u-sm-4">
+                                <form class="am-form am-form-horizontal">
+                                    <div class="am-form-group">
+                                        <label for="class-name" class="am-u-sm-3 am-form-label"><small>Name</small></label>
+                                        <div class="am-u-sm-9 ">
+                                            <input type="text" id="class-name" v-model="model.name" class="am-input-sm" placeholder="field name">
+                                        </div>
+                                    </div>
+
+                                    <div class="am-form-group">
+                                        <label for="class-unit" class="am-u-sm-3 am-form-label"><small>Unit</small></label>
+                                        <div class="am-u-sm-9 ">
+                                            <input type="text" id="class-unit" v-model="model.package" class="am-input-sm" placeholder="unit">
+                                        </div>
+                                    </div>
+
+                                    <div class="am-form-group">
+                                        <label for="class-format" class="am-u-sm-3 am-form-label"><small>Format</small></label>
+                                        <div class="am-u-sm-9 ">
+                                            <input type="text" id="class-format" v-model="model.format" class="am-input-sm" placeholder="format">
+                                        </div>
+                                    </div>
+
+                                    <div class="am-form-group">
+                                        <label for="class-collectible" class="am-u-sm-3 am-form-label"><small>Collectible</small></label>
+                                        <div class="am-u-sm-9 ">
+                                            <input type="text" id="class-collectible" v-model="model.collectible" class="am-input-sm" placeholder="collectible">
+                                        </div>
+                                    </div>
+
+                                    <div class="am-form-group">
+                                        <label for="class-description" class="am-u-sm-3 am-form-label"><small>Description</small></label>
+                                        <div class="am-u-sm-9 ">
+                                            <input type="text" id="class-description" v-model="model.description" class="am-input-sm" placeholder="description">
+                                        </div>
+                                    </div>
+
+                                </form>
+
+
+                            </div>
+                            <div class="am-u-sm-4">
+                                <form class="am-form am-form-horizontal">
+                                    <div class="am-form-group">
+                                        <label for="class-label" class="am-u-sm-3 am-form-label"><small>Label</small></label>
+                                        <div class="am-u-sm-9 ">
+                                            <input type="text" id="class-label" v-model="model.label" class="am-input-sm" placeholder="label">
+                                        </div>
+                                    </div>
+
+                                    <div class="am-form-group">
+                                        <label for="class-range" class="am-u-sm-3 am-form-label"><small>Range</small></label>
+                                        <div class="am-u-sm-9 ">
+                                            <input type="text" id="class-range" v-model="model.range" class="am-input-sm" placeholder="range">
+                                        </div>
+                                    </div>
+
+                                    <div class="am-form-group">
+                                        <label for="class-optional" class="am-u-sm-3 am-form-label"><small>Optional</small></label>
+                                        <div class="am-u-sm-9 ">
+                                            <input type="text" id="class-optional" v-model="model.optional" class="am-input-sm" placeholder="optional">
+                                        </div>
+                                    </div>
+
+                                    <div class="am-form-group">
+                                        <label for="class-collector" class="am-u-sm-3 am-form-label"><small>Collector</small></label>
+                                        <div class="am-u-sm-9 ">
+                                            <input type="text" id="class-collector" v-model="model.collector" class="am-input-sm" placeholder="collector">
+                                        </div>
+                                    </div>
+
+                                    <div class="am-form-group">
+                                        <div class="am-u-sm-3 am-u-sm-push-6">
+                                            <button type="submit" class="am-btn am-btn-sm " @click="submit">新增</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="am-g  am-form">
+
+
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <hr/>
+
+            <div class="am-u-sm-1 am-u-lg-12">
+                <form class="am-form">
+                    <table class="am-table am-table-striped am-table-hover table-main am-table-bordered am-table-radius" >
+                        <thead>
+                        <tr>
+                            <th class="table-owner">Owner</th>
+                            <th class="table-name">Name</th>
+                            <th class="table-label">Label</th>
+                            <th class="table-class">Class</th>
+                            <th class="table-unit">Unit</th>
+                            <th class="table-range">Range</th>
+                            <th class="table-default">Default</th>
+                            <th class="table-format">Format</th>
+                            <th class="table-optional">Optional</th>
+                            <th class="table-configurable">Configurable</th>
+                            <th class="table-collectible">Collectible</th>
+                            <th class="table-collector">Collector</th>
+                            <th class="table-interval">Interval</th>
+                            <th class="table-description">Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="record in records">
+                            <td>{{record.owner}}</td>
+                            <td class="am-primary">{{record.name}}</td>
+                            <td>{{record.label}}</td>
+                            <td>{{record.class}}</td>
+                            <td>{{record.unit}}</td>
+                            <td>{{record.range}}</td>
+                            <td>{{record.default}}</td>
+                            <td>{{record.format}}</td>
+                            <td class="am-primary">{{record.optional}}</td>
+                            <td>{{record.configurable}}</td>
+                            <td>{{record.collectible}}</td>
+                            <td>{{record.collector}}</td>
+                            <td>{{record.interval}}</td>
+                            <td>{{record.description}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+            </div>
+        </div>
+
+        <footer class="admin-content-footer">
+            <hr>
+            <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+        </footer>
+
+    </div>
+    <!-- content end -->
+
+</div>
+
+<a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+
+<footer>
+    <hr>
+    <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+</footer>
+
+<script src="amaze/assets/js/amazeui.min.js"></script>
+<script src="amaze/assets/js/app.js"></script>
+
+<script  type="text/javascript">
+    var fieldModelApp = new Vue({
+        el: '#field-model-form',
+        data: {
+            model: {
+                owner: '',
+                name: '',
+                label: '',
+                class: '',
+                unit: '',
+                range: '',
+                default: '',
+                format: '',
+                optional: '',
+                configurable: '',
+                collectible: '',
+                collector: '',
+                interval: '',
+                description: ''
+            },
+            records: [],
+            classNames: [],
+            classes: ["string", "integer", "list", "object"],
+            message: ""
+        },
+        methods: {
+            submit: function(){
+                $.ajax({
+                    url: "/api/v1/model/field",
+                    type: "POST",
+                    data: this.data,
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (result) {
+                        console.log(result["message"])
+                    }
+                })
+                debugger;
+            }
+        }
+
+    })
+
+    $.ajax({
+        url: "/api/v1/model/fields",
+        type: "GET",
+        dataType: "json",
+        success: function (response) {
+            fieldModelApp.records = response["result"]
+        }
+    })
+
+    $.ajax({
+        url: "/api/v1/model/classes/name",
+        type: "GET",
+        dataType: "json",
+        success: function (response) {
+            fieldModelApp.classNames = response["result"]
+            fieldModelApp.classes.concat(response["result"])
+        }
+    })
+
+</script>
+</body>
+</html>

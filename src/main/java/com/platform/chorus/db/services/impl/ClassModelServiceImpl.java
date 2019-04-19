@@ -1,15 +1,13 @@
-package com.platform.chorus.database.services.impl;
+package com.platform.chorus.db.services.impl;
 
-import static com.platform.chorus.database.tables.ClassModel.*;
+import static com.platform.chorus.db.tables.ClassModel.*;
 import static org.jooq.impl.DSL.concat;
 
-import com.platform.chorus.database.services.ClassModelService;
-import com.platform.chorus.database.tables.daos.ClassModelDao;
-import com.platform.chorus.database.tables.pojos.ClassModel;
+import com.platform.chorus.db.services.ClassModelService;
+import com.platform.chorus.db.tables.daos.ClassModelDao;
+import com.platform.chorus.db.tables.pojos.ClassModel;
 import org.jooq.Configuration;
 import org.jooq.DSLContext;
-import org.jooq.Record;
-import org.jooq.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

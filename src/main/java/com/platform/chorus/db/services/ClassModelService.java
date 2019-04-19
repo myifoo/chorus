@@ -1,7 +1,7 @@
-package com.platform.chorus.database.services;
+package com.platform.chorus.db.services;
 
 
-import com.platform.chorus.database.tables.pojos.ClassModel;
+import com.platform.chorus.db.tables.pojos.ClassModel;
 
 import java.util.List;
 

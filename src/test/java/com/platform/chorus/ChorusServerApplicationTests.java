@@ -1,7 +1,7 @@
 package com.platform.chorus;
 
-import com.platform.chorus.database.services.ClassModelService;
-import com.platform.chorus.database.tables.pojos.ClassModel;
+import com.platform.chorus.db.services.ClassModelService;
+import com.platform.chorus.db.tables.pojos.ClassModel;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

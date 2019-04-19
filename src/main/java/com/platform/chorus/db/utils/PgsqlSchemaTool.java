@@ -1,12 +1,10 @@
-package com.platform.chorus.database.utils;
+package com.platform.chorus.db.utils;
 
 import org.apache.commons.cli.CommandLine;
 import org.jooq.DSLContext;
-import org.jooq.DataType;
 import org.jooq.SQLDialect;
 import org.jooq.exception.DataAccessException;
 import org.jooq.impl.DSL;
-import org.jooq.impl.SQLDataType;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
@@ -57,11 +55,11 @@ public class PgsqlSchemaTool {
         String name = "chorusdb"; //todo
 
         try (DSLContext dsl = DSL.using(DriverManager.getConnection(String.format("jdbc:postgresql://%s:%s/postgres", ip, port), user, password), SQLDialect.POSTGRES)) {
-            System.out.println("Connect to database successfully");
+            System.out.println("Connect to db successfully");
 
             try {
                 System.out.println("firstly, drop ailysisdb if exist ...");
-                dsl.execute("drop database "+name);
+                dsl.execute("drop db "+name);
             } catch (DataAccessException e) {
                 System.out.println(e.getMessage());
             }
@@ -70,7 +68,7 @@ public class PgsqlSchemaTool {
             dsl.execute(String.format("CREATE DATABASE %s OWNER %s;", name, user)); // todo
             System.out.println("Create DB done!");
         } catch (Exception e) {
-            System.out.println(String.format("create database failed : %s", e.getMessage()));
+            System.out.println(String.format("create db failed : %s", e.getMessage()));
         }
 
         try (DSLContext dsl = DSL.using(DriverManager.getConnection(String.format("jdbc:postgresql://%s:%s/%s", ip, port, name), user, password), SQLDialect.POSTGRES)) {
