@@ -28,22 +28,6 @@
         </encoder>
     </appender>
 
-    <appender name="analysis" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>log/${SERVER}.analysis.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <fileNamePattern>log\${SERVER}.analysis.%i.log.zip</fileNamePattern>
-            <minIndex>1</minIndex>
-            <maxIndex>100</maxIndex>
-        </rollingPolicy>
-
-        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <maxFileSize>100MB</maxFileSize>
-        </triggeringPolicy>
-        <encoder>
-            <pattern>>%date - %msg%n</pattern>
-        </encoder>
-    </appender>
-
     <!--root的级别设置以及启用哪些appender-->
     <root level="DEBUG">
         <appender-ref ref="Rolling2"/>

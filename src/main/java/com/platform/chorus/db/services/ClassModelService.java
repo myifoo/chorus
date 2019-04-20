@@ -12,4 +12,5 @@ public interface ClassModelService {
     String getHtml();
     List<ClassModel> getPage(int offset, int limit);
     List<String> getAllFullName();
+    void delete(String pkg, String name);
 }

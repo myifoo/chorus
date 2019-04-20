@@ -2,6 +2,7 @@ package com.platform.chorus.db.services.impl;
 
 import static com.platform.chorus.db.tables.ClassModel.*;
 import static org.jooq.impl.DSL.concat;
+import static org.jooq.impl.DSL.replace;
 
 import com.platform.chorus.db.services.ClassModelService;
 import com.platform.chorus.db.tables.daos.ClassModelDao;
@@ -63,6 +64,11 @@ public class ClassModelServiceImpl implements ClassModelService {
                 .getValues(0, String.class); // more faster
     }
 
-
-
+    @Override
+    public void delete(String pkg, String name) {
+        dsl.delete(CLASS_MODEL)
+                .where(CLASS_MODEL.NAME.eq(name))
+                .and(CLASS_MODEL.PACKAGE.eq(pkg))
+                .execute();
+    }
 }

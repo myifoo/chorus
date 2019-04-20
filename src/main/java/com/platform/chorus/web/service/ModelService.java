@@ -1,5 +1,6 @@
 package com.platform.chorus.web.service;
 
+import com.platform.chorus.cim.model.CIModelService;
 import com.platform.chorus.db.services.ClassModelService;
 import com.platform.chorus.db.services.FieldModelService;
 import com.platform.chorus.db.tables.pojos.ClassModel;
@@ -20,12 +21,15 @@ public class ModelService {
     @Autowired
     FieldModelService fieldDaoService;
 
+    @Autowired
+    CIModelService modelService;
+
     public List<Integer> create(List<ClassModel> models) {
-        return daoService.save(models);
+        return modelService.create(models);
     }
 
     public Integer create(ClassModel model) {
-        return daoService.save(model);
+        return modelService.create(model);
     }
 
     public List<ClassModel> getAllClass() {
@@ -41,7 +45,7 @@ public class ModelService {
     }
 
     public Integer createField(FieldModel model) {
-        return fieldDaoService.save(model);
+        return modelService.createField(model);
     }
 
     public List<FieldModel> getAllField() {
