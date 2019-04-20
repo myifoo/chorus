@@ -42,4 +42,20 @@ public class GraphTemplate {
         }
     }
 
+    public void createNode(String labels, String properties) {
+        run(String.format("CREATE (node:%s %s)", labels, properties));
+    }
+
+    public void createRelation(String a, String b, String relation) {
+        run(String.format("MATCH (a:%s), (b:%s) CREATE (a)-[r:%s]->(b)", a, b, relation));
+    }
+
+    public void deleteRelation(String labels) {
+        run(String.format("MATCH (a:%s)-[r]-(n) delete r", labels));
+    }
+
+    public void deleteNode(String labels) {
+        run(String.format("MATCH (n:%s) delete (n)", labels));
+    }
+
 }

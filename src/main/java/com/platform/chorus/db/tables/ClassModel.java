@@ -37,7 +37,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ClassModel extends TableImpl<ClassModelRecord> {
 
-    private static final long serialVersionUID = -324136742;
+    private static final long serialVersionUID = 171745576;
 
     /**
      * The reference instance of <code>public.class_model</code>
@@ -58,9 +58,9 @@ public class ClassModel extends TableImpl<ClassModelRecord> {
     public final TableField<ClassModelRecord, Integer> ID = createField("id", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.field("nextval('class_model_id_seq'::regclass)", org.jooq.impl.SQLDataType.INTEGER)), this, "");
 
     /**
-     * The column <code>public.class_model.package</code>.
+     * The column <code>public.class_model.domain</code>.
      */
-    public final TableField<ClassModelRecord, String> PACKAGE = createField("package", org.jooq.impl.SQLDataType.VARCHAR(200).nullable(false), this, "");
+    public final TableField<ClassModelRecord, String> DOMAIN = createField("domain", org.jooq.impl.SQLDataType.VARCHAR(200).nullable(false), this, "");
 
     /**
      * The column <code>public.class_model.name</code>.
@@ -70,12 +70,12 @@ public class ClassModel extends TableImpl<ClassModelRecord> {
     /**
      * The column <code>public.class_model.extend</code>.
      */
-    public final TableField<ClassModelRecord, String> EXTEND = createField("extend", org.jooq.impl.SQLDataType.VARCHAR(200).nullable(false), this, "");
+    public final TableField<ClassModelRecord, String> EXTEND = createField("extend", org.jooq.impl.SQLDataType.VARCHAR(200), this, "");
 
     /**
      * The column <code>public.class_model.label</code>.
      */
-    public final TableField<ClassModelRecord, String> LABEL = createField("label", org.jooq.impl.SQLDataType.VARCHAR(20).nullable(false), this, "");
+    public final TableField<ClassModelRecord, String> LABEL = createField("label", org.jooq.impl.SQLDataType.VARCHAR(20), this, "");
 
     /**
      * The column <code>public.class_model.modifier</code>.

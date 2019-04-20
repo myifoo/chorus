@@ -48,4 +48,12 @@ public class FieldModelServiceImpl implements FieldModelService {
     public String getHtml() {
         return dsl.select().from(FIELD_MODEL).fetch().formatHTML();
     }
+
+    @Override
+    public void delete(String owner, String name) {
+        dsl.delete(FIELD_MODEL)
+                .where(FIELD_MODEL.OWNER.eq(owner))
+                .and(FIELD_MODEL.NAME.eq(name))
+                .execute();
+    }
 }

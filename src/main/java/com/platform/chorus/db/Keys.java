@@ -6,14 +6,12 @@ package com.platform.chorus.db;
 
 import com.platform.chorus.db.tables.ClassModel;
 import com.platform.chorus.db.tables.Collector;
-import com.platform.chorus.db.tables.Entity;
 import com.platform.chorus.db.tables.FieldModel;
-import com.platform.chorus.db.tables.Value;
+import com.platform.chorus.db.tables.ItemValue;
 import com.platform.chorus.db.tables.records.ClassModelRecord;
 import com.platform.chorus.db.tables.records.CollectorRecord;
-import com.platform.chorus.db.tables.records.EntityRecord;
 import com.platform.chorus.db.tables.records.FieldModelRecord;
-import com.platform.chorus.db.tables.records.ValueRecord;
+import com.platform.chorus.db.tables.records.ItemValueRecord;
 
 import javax.annotation.Generated;
 
@@ -41,9 +39,8 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     public static final Identity<ClassModelRecord, Integer> IDENTITY_CLASS_MODEL = Identities0.IDENTITY_CLASS_MODEL;
-    public static final Identity<EntityRecord, Integer> IDENTITY_ENTITY = Identities0.IDENTITY_ENTITY;
     public static final Identity<FieldModelRecord, Integer> IDENTITY_FIELD_MODEL = Identities0.IDENTITY_FIELD_MODEL;
-    public static final Identity<ValueRecord, Integer> IDENTITY_VALUE = Identities0.IDENTITY_VALUE;
+    public static final Identity<ItemValueRecord, Integer> IDENTITY_ITEM_VALUE = Identities0.IDENTITY_ITEM_VALUE;
 
     // -------------------------------------------------------------------------
     // UNIQUE and PRIMARY KEY definitions
@@ -52,10 +49,9 @@ public class Keys {
     public static final UniqueKey<ClassModelRecord> CLASS_MODEL_PKEY = UniqueKeys0.CLASS_MODEL_PKEY;
     public static final UniqueKey<ClassModelRecord> CL_U_KEY = UniqueKeys0.CL_U_KEY;
     public static final UniqueKey<CollectorRecord> COLLECTOR_PKEY = UniqueKeys0.COLLECTOR_PKEY;
-    public static final UniqueKey<EntityRecord> ENTITY_PKEY = UniqueKeys0.ENTITY_PKEY;
     public static final UniqueKey<FieldModelRecord> FIELD_MODEL_PKEY = UniqueKeys0.FIELD_MODEL_PKEY;
     public static final UniqueKey<FieldModelRecord> FD_U_KEY = UniqueKeys0.FD_U_KEY;
-    public static final UniqueKey<ValueRecord> VALUE_PKEY = UniqueKeys0.VALUE_PKEY;
+    public static final UniqueKey<ItemValueRecord> ITEM_VALUE_PKEY = UniqueKeys0.ITEM_VALUE_PKEY;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
@@ -68,18 +64,16 @@ public class Keys {
 
     private static class Identities0 {
         public static Identity<ClassModelRecord, Integer> IDENTITY_CLASS_MODEL = Internal.createIdentity(ClassModel.CLASS_MODEL, ClassModel.CLASS_MODEL.ID);
-        public static Identity<EntityRecord, Integer> IDENTITY_ENTITY = Internal.createIdentity(Entity.ENTITY, Entity.ENTITY.ID);
         public static Identity<FieldModelRecord, Integer> IDENTITY_FIELD_MODEL = Internal.createIdentity(FieldModel.FIELD_MODEL, FieldModel.FIELD_MODEL.ID);
-        public static Identity<ValueRecord, Integer> IDENTITY_VALUE = Internal.createIdentity(Value.VALUE, Value.VALUE.OWNER);
+        public static Identity<ItemValueRecord, Integer> IDENTITY_ITEM_VALUE = Internal.createIdentity(ItemValue.ITEM_VALUE, ItemValue.ITEM_VALUE.OWNER);
     }
 
     private static class UniqueKeys0 {
         public static final UniqueKey<ClassModelRecord> CLASS_MODEL_PKEY = Internal.createUniqueKey(ClassModel.CLASS_MODEL, "class_model_pkey", ClassModel.CLASS_MODEL.ID);
-        public static final UniqueKey<ClassModelRecord> CL_U_KEY = Internal.createUniqueKey(ClassModel.CLASS_MODEL, "cl_u_key", ClassModel.CLASS_MODEL.PACKAGE, ClassModel.CLASS_MODEL.NAME);
+        public static final UniqueKey<ClassModelRecord> CL_U_KEY = Internal.createUniqueKey(ClassModel.CLASS_MODEL, "cl_u_key", ClassModel.CLASS_MODEL.DOMAIN, ClassModel.CLASS_MODEL.NAME);
         public static final UniqueKey<CollectorRecord> COLLECTOR_PKEY = Internal.createUniqueKey(Collector.COLLECTOR, "collector_pkey", Collector.COLLECTOR.NAME);
-        public static final UniqueKey<EntityRecord> ENTITY_PKEY = Internal.createUniqueKey(Entity.ENTITY, "entity_pkey", Entity.ENTITY.ID);
         public static final UniqueKey<FieldModelRecord> FIELD_MODEL_PKEY = Internal.createUniqueKey(FieldModel.FIELD_MODEL, "field_model_pkey", FieldModel.FIELD_MODEL.ID);
         public static final UniqueKey<FieldModelRecord> FD_U_KEY = Internal.createUniqueKey(FieldModel.FIELD_MODEL, "fd_u_key", FieldModel.FIELD_MODEL.OWNER, FieldModel.FIELD_MODEL.NAME);
-        public static final UniqueKey<ValueRecord> VALUE_PKEY = Internal.createUniqueKey(Value.VALUE, "value_pkey", Value.VALUE.OWNER);
+        public static final UniqueKey<ItemValueRecord> ITEM_VALUE_PKEY = Internal.createUniqueKey(ItemValue.ITEM_VALUE, "item_value_pkey", ItemValue.ITEM_VALUE.OWNER);
     }
 }

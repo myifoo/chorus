@@ -6,10 +6,9 @@ package com.platform.chorus.db;
 
 import com.platform.chorus.db.tables.ClassModel;
 import com.platform.chorus.db.tables.Collector;
-import com.platform.chorus.db.tables.Entity;
 import com.platform.chorus.db.tables.FieldModel;
-import com.platform.chorus.db.tables.Relationship;
-import com.platform.chorus.db.tables.Value;
+import com.platform.chorus.db.tables.ItemValue;
+import com.platform.chorus.db.tables.Relation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,7 +34,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Public extends SchemaImpl {
 
-    private static final long serialVersionUID = -43298080;
+    private static final long serialVersionUID = 1047440549;
 
     /**
      * The reference instance of <code>public</code>
@@ -53,24 +52,19 @@ public class Public extends SchemaImpl {
     public final Collector COLLECTOR = com.platform.chorus.db.tables.Collector.COLLECTOR;
 
     /**
-     * The table <code>public.entity</code>.
-     */
-    public final Entity ENTITY = com.platform.chorus.db.tables.Entity.ENTITY;
-
-    /**
      * The table <code>public.field_model</code>.
      */
     public final FieldModel FIELD_MODEL = com.platform.chorus.db.tables.FieldModel.FIELD_MODEL;
 
     /**
-     * The table <code>public.relationship</code>.
+     * The table <code>public.item_value</code>.
      */
-    public final Relationship RELATIONSHIP = com.platform.chorus.db.tables.Relationship.RELATIONSHIP;
+    public final ItemValue ITEM_VALUE = com.platform.chorus.db.tables.ItemValue.ITEM_VALUE;
 
     /**
-     * The table <code>public.value</code>.
+     * The table <code>public.relation</code>.
      */
-    public final Value VALUE = com.platform.chorus.db.tables.Value.VALUE;
+    public final Relation RELATION = com.platform.chorus.db.tables.Relation.RELATION;
 
     /**
      * No further instances allowed
@@ -99,9 +93,8 @@ public class Public extends SchemaImpl {
         return Arrays.<Table<?>>asList(
             ClassModel.CLASS_MODEL,
             Collector.COLLECTOR,
-            Entity.ENTITY,
             FieldModel.FIELD_MODEL,
-            Relationship.RELATIONSHIP,
-            Value.VALUE);
+            ItemValue.ITEM_VALUE,
+            Relation.RELATION);
     }
 }

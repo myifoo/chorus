@@ -65,10 +65,10 @@ public class ClassModelDao extends DAOImpl<ClassModelRecord, com.platform.chorus
     }
 
     /**
-     * Fetch records that have <code>package IN (values)</code>
+     * Fetch records that have <code>domain IN (values)</code>
      */
-    public List<com.platform.chorus.db.tables.pojos.ClassModel> fetchByPackage(String... values) {
-        return fetch(ClassModel.CLASS_MODEL.PACKAGE, values);
+    public List<com.platform.chorus.db.tables.pojos.ClassModel> fetchByDomain(String... values) {
+        return fetch(ClassModel.CLASS_MODEL.DOMAIN, values);
     }
 
     /**

@@ -23,7 +23,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Collector implements Serializable {
 
-    private static final long serialVersionUID = -931411043;
+    private static final long serialVersionUID = 1261647802;
 
     private String   name;
     private String   result;

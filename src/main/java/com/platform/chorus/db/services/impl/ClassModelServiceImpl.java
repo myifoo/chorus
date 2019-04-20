@@ -68,7 +68,7 @@ public class ClassModelServiceImpl implements ClassModelService {
     public void delete(String pkg, String name) {
         dsl.delete(CLASS_MODEL)
                 .where(CLASS_MODEL.NAME.eq(name))
-                .and(CLASS_MODEL.PACKAGE.eq(pkg))
+                .and(CLASS_MODEL.DOMAIN.eq(pkg))
                 .execute();
     }
 }

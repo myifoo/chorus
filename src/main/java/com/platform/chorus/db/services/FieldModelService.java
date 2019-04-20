@@ -12,4 +12,5 @@ public interface FieldModelService {
     List<Integer> save(List<FieldModel> models);
     List<FieldModel> getAll();
     String getHtml();
+    void delete(String owner, String name);
 }

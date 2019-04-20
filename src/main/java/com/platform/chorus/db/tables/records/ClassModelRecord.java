@@ -28,7 +28,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ClassModelRecord extends UpdatableRecordImpl<ClassModelRecord> implements Record8<Integer, String, String, String, String, String, String, String> {
 
-    private static final long serialVersionUID = -45963876;
+    private static final long serialVersionUID = 2059359208;
 
     /**
      * Setter for <code>public.class_model.id</code>.
@@ -45,16 +45,16 @@ public class ClassModelRecord extends UpdatableRecordImpl<ClassModelRecord> impl
     }
 
     /**
-     * Setter for <code>public.class_model.package</code>.
+     * Setter for <code>public.class_model.domain</code>.
      */
-    public void setPackage(String value) {
+    public void setDomain(String value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>public.class_model.package</code>.
+     * Getter for <code>public.class_model.domain</code>.
      */
-    public String getPackage() {
+    public String getDomain() {
         return (String) get(1);
     }
 
@@ -187,7 +187,7 @@ public class ClassModelRecord extends UpdatableRecordImpl<ClassModelRecord> impl
      */
     @Override
     public Field<String> field2() {
-        return ClassModel.CLASS_MODEL.PACKAGE;
+        return ClassModel.CLASS_MODEL.DOMAIN;
     }
 
     /**
@@ -251,7 +251,7 @@ public class ClassModelRecord extends UpdatableRecordImpl<ClassModelRecord> impl
      */
     @Override
     public String component2() {
-        return getPackage();
+        return getDomain();
     }
 
     /**
@@ -315,7 +315,7 @@ public class ClassModelRecord extends UpdatableRecordImpl<ClassModelRecord> impl
      */
     @Override
     public String value2() {
-        return getPackage();
+        return getDomain();
     }
 
     /**
@@ -380,7 +380,7 @@ public class ClassModelRecord extends UpdatableRecordImpl<ClassModelRecord> impl
      */
     @Override
     public ClassModelRecord value2(String value) {
-        setPackage(value);
+        setDomain(value);
         return this;
     }
 
@@ -468,11 +468,11 @@ public class ClassModelRecord extends UpdatableRecordImpl<ClassModelRecord> impl
     /**
      * Create a detached, initialised ClassModelRecord
      */
-    public ClassModelRecord(Integer id, String package_, String name, String extend, String label, String modifier, String scope, String description) {
+    public ClassModelRecord(Integer id, String domain, String name, String extend, String label, String modifier, String scope, String description) {
         super(ClassModel.CLASS_MODEL);
 
         set(0, id);
-        set(1, package_);
+        set(1, domain);
         set(2, name);
         set(3, extend);
         set(4, label);

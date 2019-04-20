@@ -48,7 +48,7 @@ CREATE TABLE public.collector
 );
 
 
-CREATE TABLE public.entity
+CREATE TABLE public.item_entity
 (
     id SERIAL PRIMARY KEY NOT NULL,                     -- entity id
     name character varying(50),                         -- entity name, default is ${type name}_${id}
@@ -59,7 +59,7 @@ CREATE TABLE public.entity
     description text
 );
 
-CREATE TABLE public.value
+CREATE TABLE public.item_value
 (
     owner SERIAL PRIMARY KEY NOT NULL,                  -- entity id
     type character varying(50),                         -- primitive type: integer, long, float, double, boolean, string, list
@@ -68,7 +68,7 @@ CREATE TABLE public.value
     description text
 );
 
-CREATE TABLE public.relationship
+CREATE TABLE public.relation
 (
     sid integer,
     tid integer,

@@ -28,7 +28,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class FieldModelRecord extends UpdatableRecordImpl<FieldModelRecord> implements Record15<Integer, String, String, String, String, String, String, String, String, Boolean, Boolean, Boolean, String, Integer, String> {
 
-    private static final long serialVersionUID = 1548749391;
+    private static final long serialVersionUID = 701776212;
 
     /**
      * Setter for <code>public.field_model.id</code>.
@@ -87,16 +87,16 @@ public class FieldModelRecord extends UpdatableRecordImpl<FieldModelRecord> impl
     }
 
     /**
-     * Setter for <code>public.field_model.class</code>.
+     * Setter for <code>public.field_model.type</code>.
      */
-    public void setClass_(String value) {
+    public void setType(String value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>public.field_model.class</code>.
+     * Getter for <code>public.field_model.type</code>.
      */
-    public String getClass_() {
+    public String getType() {
         return (String) get(4);
     }
 
@@ -309,7 +309,7 @@ public class FieldModelRecord extends UpdatableRecordImpl<FieldModelRecord> impl
      */
     @Override
     public Field<String> field5() {
-        return FieldModel.FIELD_MODEL.CLASS;
+        return FieldModel.FIELD_MODEL.TYPE;
     }
 
     /**
@@ -429,7 +429,7 @@ public class FieldModelRecord extends UpdatableRecordImpl<FieldModelRecord> impl
      */
     @Override
     public String component5() {
-        return getClass_();
+        return getType();
     }
 
     /**
@@ -549,7 +549,7 @@ public class FieldModelRecord extends UpdatableRecordImpl<FieldModelRecord> impl
      */
     @Override
     public String value5() {
-        return getClass_();
+        return getType();
     }
 
     /**
@@ -673,7 +673,7 @@ public class FieldModelRecord extends UpdatableRecordImpl<FieldModelRecord> impl
      */
     @Override
     public FieldModelRecord value5(String value) {
-        setClass_(value);
+        setType(value);
         return this;
     }
 
@@ -804,14 +804,14 @@ public class FieldModelRecord extends UpdatableRecordImpl<FieldModelRecord> impl
     /**
      * Create a detached, initialised FieldModelRecord
      */
-    public FieldModelRecord(Integer id, String owner, String name, String label, String class_, String unit, String range, String default_, String format, Boolean optional, Boolean configurable, Boolean collectible, String collector, Integer interval, String description) {
+    public FieldModelRecord(Integer id, String owner, String name, String label, String type, String unit, String range, String default_, String format, Boolean optional, Boolean configurable, Boolean collectible, String collector, Integer interval, String description) {
         super(FieldModel.FIELD_MODEL);
 
         set(0, id);
         set(1, owner);
         set(2, name);
         set(3, label);
-        set(4, class_);
+        set(4, type);
         set(5, unit);
         set(6, range);
         set(7, default_);

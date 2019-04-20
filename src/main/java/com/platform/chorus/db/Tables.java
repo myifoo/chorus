@@ -6,10 +6,9 @@ package com.platform.chorus.db;
 
 import com.platform.chorus.db.tables.ClassModel;
 import com.platform.chorus.db.tables.Collector;
-import com.platform.chorus.db.tables.Entity;
 import com.platform.chorus.db.tables.FieldModel;
-import com.platform.chorus.db.tables.Relationship;
-import com.platform.chorus.db.tables.Value;
+import com.platform.chorus.db.tables.ItemValue;
+import com.platform.chorus.db.tables.Relation;
 
 import javax.annotation.Generated;
 
@@ -38,22 +37,17 @@ public class Tables {
     public static final Collector COLLECTOR = com.platform.chorus.db.tables.Collector.COLLECTOR;
 
     /**
-     * The table <code>public.entity</code>.
-     */
-    public static final Entity ENTITY = com.platform.chorus.db.tables.Entity.ENTITY;
-
-    /**
      * The table <code>public.field_model</code>.
      */
     public static final FieldModel FIELD_MODEL = com.platform.chorus.db.tables.FieldModel.FIELD_MODEL;
 
     /**
-     * The table <code>public.relationship</code>.
+     * The table <code>public.item_value</code>.
      */
-    public static final Relationship RELATIONSHIP = com.platform.chorus.db.tables.Relationship.RELATIONSHIP;
+    public static final ItemValue ITEM_VALUE = com.platform.chorus.db.tables.ItemValue.ITEM_VALUE;
 
     /**
-     * The table <code>public.value</code>.
+     * The table <code>public.relation</code>.
      */
-    public static final Value VALUE = com.platform.chorus.db.tables.Value.VALUE;
+    public static final Relation RELATION = com.platform.chorus.db.tables.Relation.RELATION;
 }

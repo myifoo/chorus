@@ -28,7 +28,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class CollectorRecord extends UpdatableRecordImpl<CollectorRecord> implements Record5<String, String, String[], String, String> {
 
-    private static final long serialVersionUID = 329640571;
+    private static final long serialVersionUID = 1266694197;
 
     /**
      * Setter for <code>public.collector.name</code>.

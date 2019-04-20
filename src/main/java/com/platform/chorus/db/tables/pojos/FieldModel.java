@@ -22,13 +22,13 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class FieldModel implements Serializable {
 
-    private static final long serialVersionUID = 1481649664;
+    private static final long serialVersionUID = 1270355536;
 
     private Integer id;
     private String  owner;
     private String  name;
     private String  label;
-    private String  class_;
+    private String  type;
     private String  unit;
     private String  range;
     private String  default_;
@@ -47,7 +47,7 @@ public class FieldModel implements Serializable {
         this.owner = value.owner;
         this.name = value.name;
         this.label = value.label;
-        this.class_ = value.class_;
+        this.type = value.type;
         this.unit = value.unit;
         this.range = value.range;
         this.default_ = value.default_;
@@ -65,7 +65,7 @@ public class FieldModel implements Serializable {
         String  owner,
         String  name,
         String  label,
-        String  class_,
+        String  type,
         String  unit,
         String  range,
         String  default_,
@@ -81,7 +81,7 @@ public class FieldModel implements Serializable {
         this.owner = owner;
         this.name = name;
         this.label = label;
-        this.class_ = class_;
+        this.type = type;
         this.unit = unit;
         this.range = range;
         this.default_ = default_;
@@ -126,12 +126,12 @@ public class FieldModel implements Serializable {
         this.label = label;
     }
 
-    public String getClass_() {
-        return this.class_;
+    public String getType() {
+        return this.type;
     }
 
-    public void setClass_(String class_) {
-        this.class_ = class_;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getUnit() {
@@ -222,7 +222,7 @@ public class FieldModel implements Serializable {
         sb.append(", ").append(owner);
         sb.append(", ").append(name);
         sb.append(", ").append(label);
-        sb.append(", ").append(class_);
+        sb.append(", ").append(type);
         sb.append(", ").append(unit);
         sb.append(", ").append(range);
         sb.append(", ").append(default_);

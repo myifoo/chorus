@@ -44,7 +44,7 @@ public class ChorusServerApplicationTests {
 		ClassModel model = new ClassModel();
 
 		model.setDescription("description");
-		model.setPackage("package");
+		model.setDomain("package");
 		model.setName("name");
 		model.setLabel("名称");
 
@@ -69,18 +69,18 @@ public class ChorusServerApplicationTests {
 		ClassModel teacher = new ClassModel();
 		ClassModel car = new ClassModel();
 
-		person.setPackage("chorus");
+		person.setDomain("chorus");
 		person.setName("Person");
 
-		student.setPackage("chorus");
+		student.setDomain("chorus");
 		student.setName("Student");
 		student.setExtend("chorus.Person");
 
-		teacher.setPackage("chorus");
+		teacher.setDomain("chorus");
 		teacher.setName("Teacher");
 		teacher.setExtend("chorus.Person");
 
-		car.setPackage("chorus");
+		car.setDomain("chorus");
 		car.setName("Car");
 
 		ciModelService.create(person);
@@ -100,16 +100,30 @@ public class ChorusServerApplicationTests {
 	}
 
 	@Test
+	public void deleteFieldNodeTest() {
+		FieldModel name = getField("string", "chorus.Person", "name", "名称");
+		FieldModel age = getField("integer", "chorus.Person", "age", "年龄");
+		FieldModel car = getField("chorus.Car", "chorus.Person", "car", "私家车");
+		FieldModel brand = getField("string", "chorus.Car", "brand", "品牌");
+
+		ciModelService.deleteField(name.getOwner(), name.getName());
+		ciModelService.deleteField(age.getOwner(), age.getName());
+		ciModelService.deleteField(car.getOwner(), car.getName());
+		ciModelService.deleteField(brand.getOwner(), brand.getName());
+	}
+
+	@Test
 	public void deleteClassTest() {
 		ciModelService.deleteClass("chorus", "Person");
 		ciModelService.deleteClass("chorus", "Student");
 		ciModelService.deleteClass("chorus", "Teacher");
+		ciModelService.deleteClass("chorus", "Car");
 	}
 
 	private FieldModel getField(String type, String owner, String name, String label) {
 		FieldModel field = new FieldModel();
 		field.setName(name);
-		field.setClass_(type);
+		field.setType(type);
 		field.setOwner(owner);
 		field.setLabel(label);
 		return field;

@@ -22,10 +22,10 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ClassModel implements Serializable {
 
-    private static final long serialVersionUID = -1967731557;
+    private static final long serialVersionUID = -1711125281;
 
     private Integer id;
-    private String  package_;
+    private String  domain;
     private String  name;
     private String  extend;
     private String  label;
@@ -37,7 +37,7 @@ public class ClassModel implements Serializable {
 
     public ClassModel(ClassModel value) {
         this.id = value.id;
-        this.package_ = value.package_;
+        this.domain = value.domain;
         this.name = value.name;
         this.extend = value.extend;
         this.label = value.label;
@@ -48,7 +48,7 @@ public class ClassModel implements Serializable {
 
     public ClassModel(
         Integer id,
-        String  package_,
+        String  domain,
         String  name,
         String  extend,
         String  label,
@@ -57,7 +57,7 @@ public class ClassModel implements Serializable {
         String  description
     ) {
         this.id = id;
-        this.package_ = package_;
+        this.domain = domain;
         this.name = name;
         this.extend = extend;
         this.label = label;
@@ -74,12 +74,12 @@ public class ClassModel implements Serializable {
         this.id = id;
     }
 
-    public String getPackage() {
-        return this.package_;
+    public String getDomain() {
+        return this.domain;
     }
 
-    public void setPackage(String package_) {
-        this.package_ = package_;
+    public void setDomain(String domain) {
+        this.domain = domain;
     }
 
     public String getName() {
@@ -135,7 +135,7 @@ public class ClassModel implements Serializable {
         StringBuilder sb = new StringBuilder("ClassModel (");
 
         sb.append(id);
-        sb.append(", ").append(package_);
+        sb.append(", ").append(domain);
         sb.append(", ").append(name);
         sb.append(", ").append(extend);
         sb.append(", ").append(label);

@@ -37,7 +37,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class FieldModel extends TableImpl<FieldModelRecord> {
 
-    private static final long serialVersionUID = 1271924705;
+    private static final long serialVersionUID = -1115691614;
 
     /**
      * The reference instance of <code>public.field_model</code>
@@ -70,12 +70,12 @@ public class FieldModel extends TableImpl<FieldModelRecord> {
     /**
      * The column <code>public.field_model.label</code>.
      */
-    public final TableField<FieldModelRecord, String> LABEL = createField("label", org.jooq.impl.SQLDataType.VARCHAR(20).nullable(false), this, "");
+    public final TableField<FieldModelRecord, String> LABEL = createField("label", org.jooq.impl.SQLDataType.VARCHAR(20), this, "");
 
     /**
-     * The column <code>public.field_model.class</code>.
+     * The column <code>public.field_model.type</code>.
      */
-    public final TableField<FieldModelRecord, String> CLASS = createField("class", org.jooq.impl.SQLDataType.VARCHAR(200).nullable(false), this, "");
+    public final TableField<FieldModelRecord, String> TYPE = createField("type", org.jooq.impl.SQLDataType.VARCHAR(200).nullable(false), this, "");
 
     /**
      * The column <code>public.field_model.unit</code>.
