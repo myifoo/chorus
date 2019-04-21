@@ -17,6 +17,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Create by A.T on 2019/4/19
+ */
 @Component
 public class CIModelServiceImpl implements CIModelService{
     final static Logger logger = LoggerFactory.getLogger(CIModelService.class);
@@ -121,7 +124,7 @@ public class CIModelServiceImpl implements CIModelService{
 
     @Override
     public List<FieldModel> getFieldByOwner(String owner) {
-        StatementResult result = template.query(String.format("match (a:%s)-[r:extend|reference *1..5]->(b) return b.domain, b.name", makeClassId(owner)));
+        StatementResult result = template.query(String.format("match (a:%s)-[r:%s|%s *1..5]->(b) return b.domain, b.name", buildClassNodeId(owner), EXTEND, REFERENCE));
 
         List<String> owners = result.stream().map(r -> r.get(0).asString() + "." + r.get(1).asString()).collect(Collectors.toList());
         owners.add(owner);
@@ -130,57 +133,43 @@ public class CIModelServiceImpl implements CIModelService{
     }
 
     private void createClassGraphNode(ClassModel model) {
-        template.createNode(makeClassId(model.getDomain(), model.getName()),
+        template.createNode(buildClassNodeId(model.getDomain(), model.getName()),
                 String.format("{ domain: '%s', name: '%s'}", model.getDomain(), model.getName()));
 
         String parent = model.getExtend();
         if (Strings.isNotEmpty(parent)) {
-            template.createRelation(makeClassId(model.getDomain(), model.getName()),
-                    makeClassId(model.getExtend()), "extend");
+            template.createRelation(buildClassNodeId(model.getDomain(), model.getName()),
+                    buildClassNodeId(model.getExtend()), EXTEND);
         }
     }
 
     private void createFieldGraphNode(FieldModel model) {
-        template.createNode(makeFieldId(model.getOwner(), model.getName()),
+        template.createNode(buildFieldNodeId(model.getOwner(), model.getName()),
                 String.format("{ type: '%s', name: '%s', label: '%s'}", model.getType(), model.getName(), model.getLabel()));
 
         template.createRelation(
-                makeClassId(model.getOwner()),
-                makeFieldId(model.getOwner(), model.getName()),
-                "own");
+                buildClassNodeId(model.getOwner()),
+                buildFieldNodeId(model.getOwner(), model.getName()),
+                OWN);
 
         if (Arrays.stream(PRIMITIVE_TYPES).noneMatch(t -> t.equals(model.getType()))) {
             template.createRelation(
-                    makeClassId(model.getOwner()),
-                    makeClassId(model.getType()),
-                    "reference");
+                    buildClassNodeId(model.getOwner()),
+                    buildClassNodeId(model.getType()),
+                    REFERENCE);
         }
     }
 
     private void deleteClassGraphNode(String domain, String name) {
-        template.deleteRelation(makeClassId(domain,name));
-        template.deleteNode(makeClassId(domain,name));
+        template.deleteRelation(buildClassNodeId(domain,name));
+        template.deleteNode(buildClassNodeId(domain,name));
     }
 
     private void deleteFieldGraphNode(String owner, String name) {
-        template.deleteRelation(makeFieldId(owner, name));
-        template.deleteNode(makeFieldId(owner, name));
+        template.deleteRelation(buildFieldNodeId(owner, name));
+        template.deleteNode(buildFieldNodeId(owner, name));
     }
 
-    private String toLabels(String path) {
-        return String.join(":", path.split("\\."));
-    }
 
-    private String makeClassId(String domain, String name) {
-        return "class:" + toLabels(domain) + ":" + name;
-    }
-
-    private String makeClassId(String classPath) {
-        return "class:" + toLabels(classPath);
-    }
-
-    private String makeFieldId(String owner, String name) {
-        return "field:" + toLabels(owner) + ":" + name;
-    }
 
 }

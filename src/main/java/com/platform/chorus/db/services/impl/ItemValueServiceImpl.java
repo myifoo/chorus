@@ -1,14 +1,18 @@
 package com.platform.chorus.db.services.impl;
 
 import com.platform.chorus.db.services.ItemValueService;
-import com.platform.chorus.db.tables.pojos.ItemValue;
 import com.platform.chorus.db.tables.daos.ItemValueDao;
+import com.platform.chorus.db.tables.pojos.ItemValue;
 import org.jooq.Configuration;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+/**
+ * Create by A.T on 2019/4/19
+ */
+@Repository
 public class ItemValueServiceImpl implements ItemValueService {
     private ItemValueDao dao;
 

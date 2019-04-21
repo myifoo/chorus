@@ -6,6 +6,7 @@ import com.platform.chorus.db.tables.pojos.FieldModel;
 import org.jooq.Configuration;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +17,7 @@ import static com.platform.chorus.db.Tables.FIELD_MODEL;
 /**
  * Create by A.T on 2019/4/19
  */
-@Service
+@Repository
 public class FieldModelServiceImpl implements FieldModelService {
     private FieldModelDao dao;
 

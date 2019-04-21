@@ -7,11 +7,15 @@ import org.jooq.Configuration;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
+/**
+ * Create by A.T on 2019/4/19
+ */
+@Repository
 public class ItemEntityServiceImpl implements ItemEntityService {
     private ItemEntityDao dao;
 

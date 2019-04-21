@@ -1,13 +1,14 @@
 package com.platform.chorus.cim.item;
 
-import com.platform.chorus.db.tables.ItemValue;
+import com.platform.chorus.cim.Service;
+import com.platform.chorus.db.tables.pojos.ItemValue;
 import com.platform.chorus.db.tables.pojos.ItemEntity;
 
 import java.util.List;
 
-public interface ItemService {
+public interface ItemService extends Service {
     Integer createItemEntity(ItemEntity entity);
     List<Integer> createItemEntity(List<ItemEntity> entities);
-    Integer createItemValue(ItemValue value);
-    List<Integer> createItemValue(List<ItemValue> values);
+    ItemValue createItemValue(ItemValue value);
+    List<ItemValue> createItemValue(List<ItemValue> values);
 }
