@@ -12,4 +12,5 @@ public interface CIModelService {
      Integer createField(FieldModel model);
      List<Integer> createField(List<FieldModel> models);
      void deleteField(String owner, String name);
+     List<FieldModel> getFieldByOwner(String owner);
 }

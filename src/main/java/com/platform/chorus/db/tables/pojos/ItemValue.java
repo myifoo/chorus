@@ -22,36 +22,32 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ItemValue implements Serializable {
 
-    private static final long serialVersionUID = -718829733;
+    private static final long serialVersionUID = -635417267;
 
     private Integer owner;
+    private String  name;
     private String  type;
-    private String  prototype;
-    private String  creator;
-    private String  description;
+    private String  value;
 
     public ItemValue() {}
 
     public ItemValue(ItemValue value) {
         this.owner = value.owner;
+        this.name = value.name;
         this.type = value.type;
-        this.prototype = value.prototype;
-        this.creator = value.creator;
-        this.description = value.description;
+        this.value = value.value;
     }
 
     public ItemValue(
         Integer owner,
+        String  name,
         String  type,
-        String  prototype,
-        String  creator,
-        String  description
+        String  value
     ) {
         this.owner = owner;
+        this.name = name;
         this.type = type;
-        this.prototype = prototype;
-        this.creator = creator;
-        this.description = description;
+        this.value = value;
     }
 
     public Integer getOwner() {
@@ -62,6 +58,14 @@ public class ItemValue implements Serializable {
         this.owner = owner;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getType() {
         return this.type;
     }
@@ -70,28 +74,12 @@ public class ItemValue implements Serializable {
         this.type = type;
     }
 
-    public String getPrototype() {
-        return this.prototype;
+    public String getValue() {
+        return this.value;
     }
 
-    public void setPrototype(String prototype) {
-        this.prototype = prototype;
-    }
-
-    public String getCreator() {
-        return this.creator;
-    }
-
-    public void setCreator(String creator) {
-        this.creator = creator;
-    }
-
-    public String getDescription() {
-        return this.description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     @Override
@@ -99,10 +87,9 @@ public class ItemValue implements Serializable {
         StringBuilder sb = new StringBuilder("ItemValue (");
 
         sb.append(owner);
+        sb.append(", ").append(name);
         sb.append(", ").append(type);
-        sb.append(", ").append(prototype);
-        sb.append(", ").append(creator);
-        sb.append(", ").append(description);
+        sb.append(", ").append(value);
 
         sb.append(")");
         return sb.toString();

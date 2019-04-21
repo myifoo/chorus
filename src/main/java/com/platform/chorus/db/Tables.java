@@ -7,6 +7,7 @@ package com.platform.chorus.db;
 import com.platform.chorus.db.tables.ClassModel;
 import com.platform.chorus.db.tables.Collector;
 import com.platform.chorus.db.tables.FieldModel;
+import com.platform.chorus.db.tables.ItemEntity;
 import com.platform.chorus.db.tables.ItemValue;
 import com.platform.chorus.db.tables.Relation;
 
@@ -40,6 +41,11 @@ public class Tables {
      * The table <code>public.field_model</code>.
      */
     public static final FieldModel FIELD_MODEL = com.platform.chorus.db.tables.FieldModel.FIELD_MODEL;
+
+    /**
+     * The table <code>public.item_entity</code>.
+     */
+    public static final ItemEntity ITEM_ENTITY = com.platform.chorus.db.tables.ItemEntity.ITEM_ENTITY;
 
     /**
      * The table <code>public.item_value</code>.

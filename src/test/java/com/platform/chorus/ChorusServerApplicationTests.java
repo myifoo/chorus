@@ -90,6 +90,21 @@ public class ChorusServerApplicationTests {
 	}
 
 	@Test
+	public void createPupilStudentTest() {
+		ClassModel pupil = new ClassModel();
+		pupil.setDomain("chorus");
+		pupil.setName("Pupil");
+		pupil.setExtend("chorus.Student");
+
+		ciModelService.create(pupil);
+
+		FieldModel school = getField("string", "chorus.Pupil", "school", "学校名称");
+		FieldModel hobby = getField("string", "chorus.Pupil", "hobby", "爱好");
+
+		ciModelService.createField(Arrays.asList(school, hobby));
+	}
+
+	@Test
 	public void createFieldNodeTest() {
 		FieldModel name = getField("string", "chorus.Person", "name", "名称");
 		FieldModel age = getField("integer", "chorus.Person", "age", "年龄");

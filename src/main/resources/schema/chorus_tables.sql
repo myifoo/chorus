@@ -1,8 +1,9 @@
 DROP TABLE public.type_model;
 DROP TABLE public.field_model;
 DROP TABLE public.collector;
-DROP TABLE public.entity;
-DROP TABLE public.value;
+DROP TABLE public.item_entity;
+DROP TABLE public.item_value;
+DROP TABLE public.relation
 
 
 CREATE TABLE public.class_model
@@ -15,7 +16,7 @@ CREATE TABLE public.class_model
     modifier character varying(20) ,                    -- public, private, final, abstract, ...
     scope character varying(20) ,                       -- global, domain, local
     description text,
-    CONSTRAINT cl_u_key UNIQUE ("domain", name)
+    CONSTRAINT cm_u_key UNIQUE ("domain", name)
 );
 
 CREATE TABLE public.field_model
@@ -35,7 +36,7 @@ CREATE TABLE public.field_model
     collector character varying(100),
     interval integer,
     description text,
-    CONSTRAINT fd_u_key UNIQUE (owner, name)
+    CONSTRAINT fm_u_key UNIQUE (owner, name)
 );
 
 CREATE TABLE public.collector
@@ -52,20 +53,20 @@ CREATE TABLE public.item_entity
 (
     id SERIAL PRIMARY KEY NOT NULL,                     -- entity id
     name character varying(50),                         -- entity name, default is ${type name}_${id}
-    type character varying(200),                       -- entity's type = domain + name
+    type character varying(200),                        -- entity's type = domain + name
     creator character varying(50),
     tags character varying(50)[],                        -- tags
-    contains integer[],                                 -- all sub entity id
+    contains integer[],                                   -- all sub entity id
     description text
 );
 
 CREATE TABLE public.item_value
 (
-    owner SERIAL PRIMARY KEY NOT NULL,                  -- entity id
+    owner integer,                                      -- entity id
+    name character varying(50),
     type character varying(50),                         -- primitive type: integer, long, float, double, boolean, string, list
-    prototype character varying(200),                   -- entity's prototype = domain + name
-    creator character varying(50),
-    description text
+    value text,
+    CONSTRAINT iv_u_key UNIQUE (owner, name)
 );
 
 CREATE TABLE public.relation

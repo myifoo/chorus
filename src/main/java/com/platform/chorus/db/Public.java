@@ -7,6 +7,7 @@ package com.platform.chorus.db;
 import com.platform.chorus.db.tables.ClassModel;
 import com.platform.chorus.db.tables.Collector;
 import com.platform.chorus.db.tables.FieldModel;
+import com.platform.chorus.db.tables.ItemEntity;
 import com.platform.chorus.db.tables.ItemValue;
 import com.platform.chorus.db.tables.Relation;
 
@@ -34,7 +35,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Public extends SchemaImpl {
 
-    private static final long serialVersionUID = 1047440549;
+    private static final long serialVersionUID = 225584973;
 
     /**
      * The reference instance of <code>public</code>
@@ -55,6 +56,11 @@ public class Public extends SchemaImpl {
      * The table <code>public.field_model</code>.
      */
     public final FieldModel FIELD_MODEL = com.platform.chorus.db.tables.FieldModel.FIELD_MODEL;
+
+    /**
+     * The table <code>public.item_entity</code>.
+     */
+    public final ItemEntity ITEM_ENTITY = com.platform.chorus.db.tables.ItemEntity.ITEM_ENTITY;
 
     /**
      * The table <code>public.item_value</code>.
@@ -94,6 +100,7 @@ public class Public extends SchemaImpl {
             ClassModel.CLASS_MODEL,
             Collector.COLLECTOR,
             FieldModel.FIELD_MODEL,
+            ItemEntity.ITEM_ENTITY,
             ItemValue.ITEM_VALUE,
             Relation.RELATION);
     }

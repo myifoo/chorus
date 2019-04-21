@@ -45,6 +45,16 @@ public class FieldModelServiceImpl implements FieldModelService {
     }
 
     @Override
+    public List<FieldModel> getByOwner(String owner) {
+        return dao.fetchByOwner(owner);
+    }
+
+    @Override
+    public List<FieldModel> getByOwners(String... owners) {
+        return dao.fetchByOwner(owners);
+    }
+
+    @Override
     public String getHtml() {
         return dsl.select().from(FIELD_MODEL).fetch().formatHTML();
     }

@@ -14,7 +14,6 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import org.jooq.Field;
-import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Schema;
 import org.jooq.Table;
@@ -37,7 +36,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ItemValue extends TableImpl<ItemValueRecord> {
 
-    private static final long serialVersionUID = -590125831;
+    private static final long serialVersionUID = 162299153;
 
     /**
      * The reference instance of <code>public.item_value</code>
@@ -55,7 +54,12 @@ public class ItemValue extends TableImpl<ItemValueRecord> {
     /**
      * The column <code>public.item_value.owner</code>.
      */
-    public final TableField<ItemValueRecord, Integer> OWNER = createField("owner", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.field("nextval('item_value_owner_seq'::regclass)", org.jooq.impl.SQLDataType.INTEGER)), this, "");
+    public final TableField<ItemValueRecord, Integer> OWNER = createField("owner", org.jooq.impl.SQLDataType.INTEGER, this, "");
+
+    /**
+     * The column <code>public.item_value.name</code>.
+     */
+    public final TableField<ItemValueRecord, String> NAME = createField("name", org.jooq.impl.SQLDataType.VARCHAR(50), this, "");
 
     /**
      * The column <code>public.item_value.type</code>.
@@ -63,19 +67,9 @@ public class ItemValue extends TableImpl<ItemValueRecord> {
     public final TableField<ItemValueRecord, String> TYPE = createField("type", org.jooq.impl.SQLDataType.VARCHAR(50), this, "");
 
     /**
-     * The column <code>public.item_value.prototype</code>.
+     * The column <code>public.item_value.value</code>.
      */
-    public final TableField<ItemValueRecord, String> PROTOTYPE = createField("prototype", org.jooq.impl.SQLDataType.VARCHAR(200), this, "");
-
-    /**
-     * The column <code>public.item_value.creator</code>.
-     */
-    public final TableField<ItemValueRecord, String> CREATOR = createField("creator", org.jooq.impl.SQLDataType.VARCHAR(50), this, "");
-
-    /**
-     * The column <code>public.item_value.description</code>.
-     */
-    public final TableField<ItemValueRecord, String> DESCRIPTION = createField("description", org.jooq.impl.SQLDataType.CLOB, this, "");
+    public final TableField<ItemValueRecord, String> VALUE = createField("value", org.jooq.impl.SQLDataType.CLOB, this, "");
 
     /**
      * Create a <code>public.item_value</code> table reference
@@ -118,24 +112,8 @@ public class ItemValue extends TableImpl<ItemValueRecord> {
      * {@inheritDoc}
      */
     @Override
-    public Identity<ItemValueRecord, Integer> getIdentity() {
-        return Keys.IDENTITY_ITEM_VALUE;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public UniqueKey<ItemValueRecord> getPrimaryKey() {
-        return Keys.ITEM_VALUE_PKEY;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public List<UniqueKey<ItemValueRecord>> getKeys() {
-        return Arrays.<UniqueKey<ItemValueRecord>>asList(Keys.ITEM_VALUE_PKEY);
+        return Arrays.<UniqueKey<ItemValueRecord>>asList(Keys.IV_U_KEY);
     }
 
     /**

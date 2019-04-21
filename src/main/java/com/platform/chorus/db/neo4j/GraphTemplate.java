@@ -2,6 +2,7 @@ package com.platform.chorus.db.neo4j;
 
 import org.neo4j.driver.v1.Driver;
 import org.neo4j.driver.v1.Session;
+import org.neo4j.driver.v1.StatementResult;
 import org.neo4j.driver.v1.Value;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,13 @@ public class GraphTemplate {
         logger.debug("create graph : {}", clause);
         try (Session session = driver.session()) {
             session.writeTransaction((t)->t.run(clause));
+        }
+    }
+
+    public StatementResult query(String clause) {
+        logger.debug("query graph : {}", clause);
+        try (Session session = driver.session()) {
+            return session.readTransaction((t)->t.run(clause));
         }
     }
 

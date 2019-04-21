@@ -6,6 +6,7 @@ import com.platform.chorus.db.services.FieldModelService;
 import com.platform.chorus.db.tables.pojos.ClassModel;
 import com.platform.chorus.db.tables.pojos.FieldModel;
 import org.apache.logging.log4j.util.Strings;
+import org.neo4j.driver.v1.StatementResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class CIModelServiceImpl implements CIModelService{
@@ -115,6 +117,16 @@ public class CIModelServiceImpl implements CIModelService{
 
         models.forEach(this::createFieldGraphNode);
         return ids;
+    }
+
+    @Override
+    public List<FieldModel> getFieldByOwner(String owner) {
+        StatementResult result = template.query(String.format("match (a:%s)-[r:extend|reference *1..5]->(b) return b.domain, b.name", makeClassId(owner)));
+
+        List<String> owners = result.stream().map(r -> r.get(0).asString() + "." + r.get(1).asString()).collect(Collectors.toList());
+        owners.add(owner);
+
+        return fieldDaoService.getByOwners(owners.toArray(new String[0]));
     }
 
     private void createClassGraphNode(ClassModel model) {
