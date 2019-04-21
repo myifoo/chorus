@@ -1,0 +1,24 @@
+{
+  "schema": {
+    "model": ["domain", "name", "extend", "label", "modifier", "scope", "description"],
+    "collector": ["name", "result", "injects", "argument", "description"],
+    "field": ["owner", "name", "type", "label", "unit", "range", "default", "format", "optional", "configurable", "collectible", "collector", "interval", "description"]
+  },
+  "models": [
+    ["chorus", "IP", "", "IP地址", "", "", ""],
+    ["chorus", "Account", "", "账号", "", "", ""],
+    ["chorus", "Address", "", "地址", "", "", ""],
+    ["chorus", "HostAddress", "chorus.Address", "主机地址", "", "", ""],
+    ["chorus", "Parameter", "", "参数", "", "", ""],
+    ["chorus", "TelnetParameter", "chorus.Parameter", "Telnet参数", "", "", ""],
+    ["chorus", "Host", "", "主机", "", "", ""],
+    ["chorus", "LinuxServer", "chorus.Host", "Linux主机", "", "", ""]
+  ],
+  "collector": [
+    ["getSNMPRWTest", "SNMPRWTest", [], "argument", "description"],
+    ["name", "result", "injects", "argument", "description"]
+  ],
+  "field": [
+
+  ]
+}

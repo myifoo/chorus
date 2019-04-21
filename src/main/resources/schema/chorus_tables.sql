@@ -42,10 +42,10 @@ CREATE TABLE public.field_model
 CREATE TABLE public.collector
 (
     id SERIAL PRIMARY KEY NOT NULL,                     -- entity id
-    name character varying(100) NULL,               -- method name
+    name character varying(100) NULL,                   -- method name
     result character varying(200),                      -- method result type = result type domain + result type name
-    injects character varying(200)[],                   -- method argument type = argument type domain + argument type name
-    argument character varying(100),                    -- dynamic argument
+    injects character varying(200)[],                   -- method type = domain + name
+    argument text,                                      -- dynamic argument
     description text,
     CONSTRAINT cl_u_key UNIQUE (name)
 );

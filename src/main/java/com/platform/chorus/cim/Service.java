@@ -6,11 +6,13 @@ package com.platform.chorus.cim;
  *      configuration items manager
  */
 public interface Service {
-    String EXTEND = "extend";
-    String REFERENCE = "reference";
-    String INSTANCE = "instance";
-    String OWN = "own";
-    String CONTAIN = "contain";
+    String EXTEND = "extend";       // class model extend class model
+    String REFERENCE = "reference"; // class model reference class model
+    String INSTANCE = "instance";   // class model instance item entity
+    String OWN = "own";             // class model contain field model
+    String CONTAIN = "contain";     // item entity contain item entity
+    String RETURN = "return";       // collector return data type
+    String REQUIRE = "require";     // collector require data type
 
     default String buildCommonId(String path) {
         return String.join(":", path.split("\\."));
