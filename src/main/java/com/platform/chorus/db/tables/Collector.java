@@ -14,6 +14,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import org.jooq.Field;
+import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Schema;
 import org.jooq.Table;
@@ -36,7 +37,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Collector extends TableImpl<CollectorRecord> {
 
-    private static final long serialVersionUID = -2127167648;
+    private static final long serialVersionUID = 47752605;
 
     /**
      * The reference instance of <code>public.collector</code>
@@ -52,9 +53,14 @@ public class Collector extends TableImpl<CollectorRecord> {
     }
 
     /**
+     * The column <code>public.collector.id</code>.
+     */
+    public final TableField<CollectorRecord, Integer> ID = createField("id", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.field("nextval('collector_id_seq'::regclass)", org.jooq.impl.SQLDataType.INTEGER)), this, "");
+
+    /**
      * The column <code>public.collector.name</code>.
      */
-    public final TableField<CollectorRecord, String> NAME = createField("name", org.jooq.impl.SQLDataType.VARCHAR(100).nullable(false), this, "");
+    public final TableField<CollectorRecord, String> NAME = createField("name", org.jooq.impl.SQLDataType.VARCHAR(100), this, "");
 
     /**
      * The column <code>public.collector.result</code>.
@@ -117,6 +123,14 @@ public class Collector extends TableImpl<CollectorRecord> {
      * {@inheritDoc}
      */
     @Override
+    public Identity<CollectorRecord, Integer> getIdentity() {
+        return Keys.IDENTITY_COLLECTOR;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public UniqueKey<CollectorRecord> getPrimaryKey() {
         return Keys.COLLECTOR_PKEY;
     }
@@ -126,7 +140,7 @@ public class Collector extends TableImpl<CollectorRecord> {
      */
     @Override
     public List<UniqueKey<CollectorRecord>> getKeys() {
-        return Arrays.<UniqueKey<CollectorRecord>>asList(Keys.COLLECTOR_PKEY);
+        return Arrays.<UniqueKey<CollectorRecord>>asList(Keys.COLLECTOR_PKEY, Keys.CL_U_KEY);
     }
 
     /**

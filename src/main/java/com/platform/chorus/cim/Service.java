@@ -10,6 +10,7 @@ public interface Service {
     String REFERENCE = "reference";
     String INSTANCE = "instance";
     String OWN = "own";
+    String CONTAIN = "contain";
 
     default String buildCommonId(String path) {
         return String.join(":", path.split("\\."));

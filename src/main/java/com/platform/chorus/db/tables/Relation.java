@@ -4,16 +4,22 @@
 package com.platform.chorus.db.tables;
 
 
+import com.platform.chorus.db.Keys;
 import com.platform.chorus.db.Public;
 import com.platform.chorus.db.tables.records.RelationRecord;
+
+import java.util.Arrays;
+import java.util.List;
 
 import javax.annotation.Generated;
 
 import org.jooq.Field;
+import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
+import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
 import org.jooq.impl.TableImpl;
 
@@ -31,7 +37,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Relation extends TableImpl<RelationRecord> {
 
-    private static final long serialVersionUID = -1498527136;
+    private static final long serialVersionUID = -1434602575;
 
     /**
      * The reference instance of <code>public.relation</code>
@@ -47,19 +53,24 @@ public class Relation extends TableImpl<RelationRecord> {
     }
 
     /**
-     * The column <code>public.relation.sid</code>.
+     * The column <code>public.relation.id</code>.
      */
-    public final TableField<RelationRecord, Integer> SID = createField("sid", org.jooq.impl.SQLDataType.INTEGER, this, "");
+    public final TableField<RelationRecord, Integer> ID = createField("id", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.field("nextval('relation_id_seq'::regclass)", org.jooq.impl.SQLDataType.INTEGER)), this, "");
 
     /**
-     * The column <code>public.relation.tid</code>.
+     * The column <code>public.relation.name</code>.
      */
-    public final TableField<RelationRecord, Integer> TID = createField("tid", org.jooq.impl.SQLDataType.INTEGER, this, "");
+    public final TableField<RelationRecord, String> NAME = createField("name", org.jooq.impl.SQLDataType.VARCHAR(20), this, "");
 
     /**
-     * The column <code>public.relation.type</code>.
+     * The column <code>public.relation.creator</code>.
      */
-    public final TableField<RelationRecord, Integer> TYPE = createField("type", org.jooq.impl.SQLDataType.INTEGER, this, "");
+    public final TableField<RelationRecord, String> CREATOR = createField("creator", org.jooq.impl.SQLDataType.VARCHAR(20), this, "");
+
+    /**
+     * The column <code>public.relation.description</code>.
+     */
+    public final TableField<RelationRecord, String> DESCRIPTION = createField("description", org.jooq.impl.SQLDataType.CLOB, this, "");
 
     /**
      * Create a <code>public.relation</code> table reference
@@ -96,6 +107,30 @@ public class Relation extends TableImpl<RelationRecord> {
     @Override
     public Schema getSchema() {
         return Public.PUBLIC;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Identity<RelationRecord, Integer> getIdentity() {
+        return Keys.IDENTITY_RELATION;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public UniqueKey<RelationRecord> getPrimaryKey() {
+        return Keys.RELATION_PKEY;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<UniqueKey<RelationRecord>> getKeys() {
+        return Arrays.<UniqueKey<RelationRecord>>asList(Keys.RELATION_PKEY);
     }
 
     /**

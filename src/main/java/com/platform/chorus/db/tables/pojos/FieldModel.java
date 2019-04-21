@@ -22,13 +22,13 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class FieldModel implements Serializable {
 
-    private static final long serialVersionUID = 1270355536;
+    private static final long serialVersionUID = -218305860;
 
     private Integer id;
     private String  owner;
     private String  name;
-    private String  label;
     private String  type;
+    private String  label;
     private String  unit;
     private String  range;
     private String  default_;
@@ -46,8 +46,8 @@ public class FieldModel implements Serializable {
         this.id = value.id;
         this.owner = value.owner;
         this.name = value.name;
-        this.label = value.label;
         this.type = value.type;
+        this.label = value.label;
         this.unit = value.unit;
         this.range = value.range;
         this.default_ = value.default_;
@@ -64,8 +64,8 @@ public class FieldModel implements Serializable {
         Integer id,
         String  owner,
         String  name,
-        String  label,
         String  type,
+        String  label,
         String  unit,
         String  range,
         String  default_,
@@ -80,8 +80,8 @@ public class FieldModel implements Serializable {
         this.id = id;
         this.owner = owner;
         this.name = name;
-        this.label = label;
         this.type = type;
+        this.label = label;
         this.unit = unit;
         this.range = range;
         this.default_ = default_;
@@ -118,20 +118,20 @@ public class FieldModel implements Serializable {
         this.name = name;
     }
 
-    public String getLabel() {
-        return this.label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
     public String getType() {
         return this.type;
     }
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getLabel() {
+        return this.label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
     }
 
     public String getUnit() {
@@ -221,8 +221,8 @@ public class FieldModel implements Serializable {
         sb.append(id);
         sb.append(", ").append(owner);
         sb.append(", ").append(name);
-        sb.append(", ").append(label);
         sb.append(", ").append(type);
+        sb.append(", ").append(label);
         sb.append(", ").append(unit);
         sb.append(", ").append(range);
         sb.append(", ").append(default_);

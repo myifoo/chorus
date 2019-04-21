@@ -14,6 +14,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import org.jooq.Field;
+import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Schema;
 import org.jooq.Table;
@@ -36,7 +37,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ItemValue extends TableImpl<ItemValueRecord> {
 
-    private static final long serialVersionUID = 162299153;
+    private static final long serialVersionUID = -674519964;
 
     /**
      * The reference instance of <code>public.item_value</code>
@@ -50,6 +51,11 @@ public class ItemValue extends TableImpl<ItemValueRecord> {
     public Class<ItemValueRecord> getRecordType() {
         return ItemValueRecord.class;
     }
+
+    /**
+     * The column <code>public.item_value.id</code>.
+     */
+    public final TableField<ItemValueRecord, Integer> ID = createField("id", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.field("nextval('item_value_id_seq'::regclass)", org.jooq.impl.SQLDataType.INTEGER)), this, "");
 
     /**
      * The column <code>public.item_value.owner</code>.
@@ -112,8 +118,24 @@ public class ItemValue extends TableImpl<ItemValueRecord> {
      * {@inheritDoc}
      */
     @Override
+    public Identity<ItemValueRecord, Integer> getIdentity() {
+        return Keys.IDENTITY_ITEM_VALUE;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public UniqueKey<ItemValueRecord> getPrimaryKey() {
+        return Keys.ITEM_VALUE_PKEY;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public List<UniqueKey<ItemValueRecord>> getKeys() {
-        return Arrays.<UniqueKey<ItemValueRecord>>asList(Keys.IV_U_KEY);
+        return Arrays.<UniqueKey<ItemValueRecord>>asList(Keys.ITEM_VALUE_PKEY, Keys.IV_U_KEY);
     }
 
     /**

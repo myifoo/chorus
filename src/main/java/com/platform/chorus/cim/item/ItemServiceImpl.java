@@ -66,6 +66,17 @@ public class ItemServiceImpl implements ItemService {
         } catch (Exception e) {
             logger.error("create item node and relation failed: {}, {}", e.getClass().getSimpleName(), e.getMessage());
         }
+
+        try {
+            entityService.fetchById(entity.getContains()).forEach(e->{
+                template.createRelation(
+                        buildItemNodeId(entity.getType(), entity.getName()),
+                        buildItemNodeId(e.getType(), e.getName()),
+                        CONTAIN);
+            });
+        } catch (Exception e) {
+            logger.error("fetch entities failed: {}, {}", e.getClass().getSimpleName(), e.getMessage());
+        }
     }
 
     @Override

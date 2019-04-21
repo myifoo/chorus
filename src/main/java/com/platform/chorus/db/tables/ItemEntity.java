@@ -37,7 +37,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ItemEntity extends TableImpl<ItemEntityRecord> {
 
-    private static final long serialVersionUID = -2076398286;
+    private static final long serialVersionUID = 1374292602;
 
     /**
      * The reference instance of <code>public.item_entity</code>
@@ -145,7 +145,7 @@ public class ItemEntity extends TableImpl<ItemEntityRecord> {
      */
     @Override
     public List<UniqueKey<ItemEntityRecord>> getKeys() {
-        return Arrays.<UniqueKey<ItemEntityRecord>>asList(Keys.ITEM_ENTITY_PKEY);
+        return Arrays.<UniqueKey<ItemEntityRecord>>asList(Keys.ITEM_ENTITY_PKEY, Keys.IE_U_KEY);
     }
 
     /**

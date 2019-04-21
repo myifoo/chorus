@@ -37,4 +37,9 @@ public class ItemEntityServiceImpl implements ItemEntityService {
         dao.insert(entities);
         return entities.stream().map(ItemEntity::getId).collect(Collectors.toList());
     }
+
+    @Override
+    public List<ItemEntity> fetchById(Integer... ids) {
+        return dao.fetchById(ids);
+    }
 }

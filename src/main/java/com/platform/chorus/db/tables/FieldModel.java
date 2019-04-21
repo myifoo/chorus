@@ -37,7 +37,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class FieldModel extends TableImpl<FieldModelRecord> {
 
-    private static final long serialVersionUID = -1115691614;
+    private static final long serialVersionUID = 1114319559;
 
     /**
      * The reference instance of <code>public.field_model</code>
@@ -68,14 +68,14 @@ public class FieldModel extends TableImpl<FieldModelRecord> {
     public final TableField<FieldModelRecord, String> NAME = createField("name", org.jooq.impl.SQLDataType.VARCHAR(50).nullable(false), this, "");
 
     /**
-     * The column <code>public.field_model.label</code>.
-     */
-    public final TableField<FieldModelRecord, String> LABEL = createField("label", org.jooq.impl.SQLDataType.VARCHAR(20), this, "");
-
-    /**
      * The column <code>public.field_model.type</code>.
      */
     public final TableField<FieldModelRecord, String> TYPE = createField("type", org.jooq.impl.SQLDataType.VARCHAR(200).nullable(false), this, "");
+
+    /**
+     * The column <code>public.field_model.label</code>.
+     */
+    public final TableField<FieldModelRecord, String> LABEL = createField("label", org.jooq.impl.SQLDataType.VARCHAR(20), this, "");
 
     /**
      * The column <code>public.field_model.unit</code>.
@@ -185,7 +185,7 @@ public class FieldModel extends TableImpl<FieldModelRecord> {
      */
     @Override
     public List<UniqueKey<FieldModelRecord>> getKeys() {
-        return Arrays.<UniqueKey<FieldModelRecord>>asList(Keys.FIELD_MODEL_PKEY, Keys.FD_U_KEY);
+        return Arrays.<UniqueKey<FieldModelRecord>>asList(Keys.FIELD_MODEL_PKEY, Keys.FM_U_KEY);
     }
 
     /**

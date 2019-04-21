@@ -79,17 +79,17 @@ public class FieldModelDao extends DAOImpl<FieldModelRecord, com.platform.chorus
     }
 
     /**
-     * Fetch records that have <code>label IN (values)</code>
-     */
-    public List<com.platform.chorus.db.tables.pojos.FieldModel> fetchByLabel(String... values) {
-        return fetch(FieldModel.FIELD_MODEL.LABEL, values);
-    }
-
-    /**
      * Fetch records that have <code>type IN (values)</code>
      */
     public List<com.platform.chorus.db.tables.pojos.FieldModel> fetchByType(String... values) {
         return fetch(FieldModel.FIELD_MODEL.TYPE, values);
+    }
+
+    /**
+     * Fetch records that have <code>label IN (values)</code>
+     */
+    public List<com.platform.chorus.db.tables.pojos.FieldModel> fetchByLabel(String... values) {
+        return fetch(FieldModel.FIELD_MODEL.LABEL, values);
     }
 
     /**

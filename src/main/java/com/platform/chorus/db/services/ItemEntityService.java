@@ -7,4 +7,5 @@ import java.util.List;
 public interface ItemEntityService {
     Integer createItemEntity(ItemEntity entity);
     List<Integer> createItemEntity(List<ItemEntity> entities);
+    List<ItemEntity> fetchById(Integer... ids);
 }

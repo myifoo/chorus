@@ -1,7 +1,6 @@
 package com.platform.chorus.db;
 
 import com.platform.chorus.cim.model.CIModelService;
-import com.platform.chorus.db.services.FieldModelService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

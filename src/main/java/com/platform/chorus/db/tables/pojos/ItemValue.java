@@ -22,8 +22,9 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ItemValue implements Serializable {
 
-    private static final long serialVersionUID = -635417267;
+    private static final long serialVersionUID = -1155650048;
 
+    private Integer id;
     private Integer owner;
     private String  name;
     private String  type;
@@ -32,6 +33,7 @@ public class ItemValue implements Serializable {
     public ItemValue() {}
 
     public ItemValue(ItemValue value) {
+        this.id = value.id;
         this.owner = value.owner;
         this.name = value.name;
         this.type = value.type;
@@ -39,15 +41,25 @@ public class ItemValue implements Serializable {
     }
 
     public ItemValue(
+        Integer id,
         Integer owner,
         String  name,
         String  type,
         String  value
     ) {
+        this.id = id;
         this.owner = owner;
         this.name = name;
         this.type = type;
         this.value = value;
+    }
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getOwner() {
@@ -86,7 +98,8 @@ public class ItemValue implements Serializable {
     public String toString() {
         StringBuilder sb = new StringBuilder("ItemValue (");
 
-        sb.append(owner);
+        sb.append(id);
+        sb.append(", ").append(owner);
         sb.append(", ").append(name);
         sb.append(", ").append(type);
         sb.append(", ").append(value);

@@ -28,7 +28,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class FieldModelRecord extends UpdatableRecordImpl<FieldModelRecord> implements Record15<Integer, String, String, String, String, String, String, String, String, Boolean, Boolean, Boolean, String, Integer, String> {
 
-    private static final long serialVersionUID = 701776212;
+    private static final long serialVersionUID = 1728920574;
 
     /**
      * Setter for <code>public.field_model.id</code>.
@@ -73,30 +73,30 @@ public class FieldModelRecord extends UpdatableRecordImpl<FieldModelRecord> impl
     }
 
     /**
-     * Setter for <code>public.field_model.label</code>.
-     */
-    public void setLabel(String value) {
-        set(3, value);
-    }
-
-    /**
-     * Getter for <code>public.field_model.label</code>.
-     */
-    public String getLabel() {
-        return (String) get(3);
-    }
-
-    /**
      * Setter for <code>public.field_model.type</code>.
      */
     public void setType(String value) {
-        set(4, value);
+        set(3, value);
     }
 
     /**
      * Getter for <code>public.field_model.type</code>.
      */
     public String getType() {
+        return (String) get(3);
+    }
+
+    /**
+     * Setter for <code>public.field_model.label</code>.
+     */
+    public void setLabel(String value) {
+        set(4, value);
+    }
+
+    /**
+     * Getter for <code>public.field_model.label</code>.
+     */
+    public String getLabel() {
         return (String) get(4);
     }
 
@@ -301,7 +301,7 @@ public class FieldModelRecord extends UpdatableRecordImpl<FieldModelRecord> impl
      */
     @Override
     public Field<String> field4() {
-        return FieldModel.FIELD_MODEL.LABEL;
+        return FieldModel.FIELD_MODEL.TYPE;
     }
 
     /**
@@ -309,7 +309,7 @@ public class FieldModelRecord extends UpdatableRecordImpl<FieldModelRecord> impl
      */
     @Override
     public Field<String> field5() {
-        return FieldModel.FIELD_MODEL.TYPE;
+        return FieldModel.FIELD_MODEL.LABEL;
     }
 
     /**
@@ -421,7 +421,7 @@ public class FieldModelRecord extends UpdatableRecordImpl<FieldModelRecord> impl
      */
     @Override
     public String component4() {
-        return getLabel();
+        return getType();
     }
 
     /**
@@ -429,7 +429,7 @@ public class FieldModelRecord extends UpdatableRecordImpl<FieldModelRecord> impl
      */
     @Override
     public String component5() {
-        return getType();
+        return getLabel();
     }
 
     /**
@@ -541,7 +541,7 @@ public class FieldModelRecord extends UpdatableRecordImpl<FieldModelRecord> impl
      */
     @Override
     public String value4() {
-        return getLabel();
+        return getType();
     }
 
     /**
@@ -549,7 +549,7 @@ public class FieldModelRecord extends UpdatableRecordImpl<FieldModelRecord> impl
      */
     @Override
     public String value5() {
-        return getType();
+        return getLabel();
     }
 
     /**
@@ -664,7 +664,7 @@ public class FieldModelRecord extends UpdatableRecordImpl<FieldModelRecord> impl
      */
     @Override
     public FieldModelRecord value4(String value) {
-        setLabel(value);
+        setType(value);
         return this;
     }
 
@@ -673,7 +673,7 @@ public class FieldModelRecord extends UpdatableRecordImpl<FieldModelRecord> impl
      */
     @Override
     public FieldModelRecord value5(String value) {
-        setType(value);
+        setLabel(value);
         return this;
     }
 
@@ -804,14 +804,14 @@ public class FieldModelRecord extends UpdatableRecordImpl<FieldModelRecord> impl
     /**
      * Create a detached, initialised FieldModelRecord
      */
-    public FieldModelRecord(Integer id, String owner, String name, String label, String type, String unit, String range, String default_, String format, Boolean optional, Boolean configurable, Boolean collectible, String collector, Integer interval, String description) {
+    public FieldModelRecord(Integer id, String owner, String name, String type, String label, String unit, String range, String default_, String format, Boolean optional, Boolean configurable, Boolean collectible, String collector, Integer interval, String description) {
         super(FieldModel.FIELD_MODEL);
 
         set(0, id);
         set(1, owner);
         set(2, name);
-        set(3, label);
-        set(4, type);
+        set(3, type);
+        set(4, label);
         set(5, unit);
         set(6, range);
         set(7, default_);

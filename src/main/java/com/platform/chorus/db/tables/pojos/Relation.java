@@ -22,61 +22,74 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Relation implements Serializable {
 
-    private static final long serialVersionUID = -1771771835;
+    private static final long serialVersionUID = 1378459452;
 
-    private Integer sid;
-    private Integer tid;
-    private Integer type;
+    private Integer id;
+    private String  name;
+    private String  creator;
+    private String  description;
 
     public Relation() {}
 
     public Relation(Relation value) {
-        this.sid = value.sid;
-        this.tid = value.tid;
-        this.type = value.type;
+        this.id = value.id;
+        this.name = value.name;
+        this.creator = value.creator;
+        this.description = value.description;
     }
 
     public Relation(
-        Integer sid,
-        Integer tid,
-        Integer type
+        Integer id,
+        String  name,
+        String  creator,
+        String  description
     ) {
-        this.sid = sid;
-        this.tid = tid;
-        this.type = type;
+        this.id = id;
+        this.name = name;
+        this.creator = creator;
+        this.description = description;
     }
 
-    public Integer getSid() {
-        return this.sid;
+    public Integer getId() {
+        return this.id;
     }
 
-    public void setSid(Integer sid) {
-        this.sid = sid;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public Integer getTid() {
-        return this.tid;
+    public String getName() {
+        return this.name;
     }
 
-    public void setTid(Integer tid) {
-        this.tid = tid;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Integer getType() {
-        return this.type;
+    public String getCreator() {
+        return this.creator;
     }
 
-    public void setType(Integer type) {
-        this.type = type;
+    public void setCreator(String creator) {
+        this.creator = creator;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Relation (");
 
-        sb.append(sid);
-        sb.append(", ").append(tid);
-        sb.append(", ").append(type);
+        sb.append(id);
+        sb.append(", ").append(name);
+        sb.append(", ").append(creator);
+        sb.append(", ").append(description);
 
         sb.append(")");
         return sb.toString();

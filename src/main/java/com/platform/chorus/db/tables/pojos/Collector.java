@@ -23,8 +23,9 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Collector implements Serializable {
 
-    private static final long serialVersionUID = 1261647802;
+    private static final long serialVersionUID = -768017657;
 
+    private Integer  id;
     private String   name;
     private String   result;
     private String[] injects;
@@ -34,6 +35,7 @@ public class Collector implements Serializable {
     public Collector() {}
 
     public Collector(Collector value) {
+        this.id = value.id;
         this.name = value.name;
         this.result = value.result;
         this.injects = value.injects;
@@ -42,17 +44,27 @@ public class Collector implements Serializable {
     }
 
     public Collector(
+        Integer  id,
         String   name,
         String   result,
         String[] injects,
         String   argument,
         String   description
     ) {
+        this.id = id;
         this.name = name;
         this.result = result;
         this.injects = injects;
         this.argument = argument;
         this.description = description;
+    }
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -99,7 +111,8 @@ public class Collector implements Serializable {
     public String toString() {
         StringBuilder sb = new StringBuilder("Collector (");
 
-        sb.append(name);
+        sb.append(id);
+        sb.append(", ").append(name);
         sb.append(", ").append(result);
         sb.append(", ").append(Arrays.toString(injects));
         sb.append(", ").append(argument);

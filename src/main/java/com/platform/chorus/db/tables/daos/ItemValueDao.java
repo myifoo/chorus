@@ -47,7 +47,21 @@ public class ItemValueDao extends DAOImpl<ItemValueRecord, com.platform.chorus.d
      */
     @Override
     protected Integer getId(com.platform.chorus.db.tables.pojos.ItemValue object) {
-        return object.getOwner();
+        return object.getId();
+    }
+
+    /**
+     * Fetch records that have <code>id IN (values)</code>
+     */
+    public List<com.platform.chorus.db.tables.pojos.ItemValue> fetchById(Integer... values) {
+        return fetch(ItemValue.ITEM_VALUE.ID, values);
+    }
+
+    /**
+     * Fetch a unique record that has <code>id = value</code>
+     */
+    public com.platform.chorus.db.tables.pojos.ItemValue fetchOneById(Integer value) {
+        return fetchOne(ItemValue.ITEM_VALUE.ID, value);
     }
 
     /**
@@ -58,10 +72,10 @@ public class ItemValueDao extends DAOImpl<ItemValueRecord, com.platform.chorus.d
     }
 
     /**
-     * Fetch a unique record that has <code>owner = value</code>
+     * Fetch records that have <code>name IN (values)</code>
      */
-    public com.platform.chorus.db.tables.pojos.ItemValue fetchOneByOwner(Integer value) {
-        return fetchOne(ItemValue.ITEM_VALUE.OWNER, value);
+    public List<com.platform.chorus.db.tables.pojos.ItemValue> fetchByName(String... values) {
+        return fetch(ItemValue.ITEM_VALUE.NAME, values);
     }
 
     /**
@@ -72,23 +86,9 @@ public class ItemValueDao extends DAOImpl<ItemValueRecord, com.platform.chorus.d
     }
 
     /**
-     * Fetch records that have <code>prototype IN (values)</code>
+     * Fetch records that have <code>value IN (values)</code>
      */
-    public List<com.platform.chorus.db.tables.pojos.ItemValue> fetchByPrototype(String... values) {
-        return fetch(ItemValue.ITEM_VALUE.PROTOTYPE, values);
-    }
-
-    /**
-     * Fetch records that have <code>creator IN (values)</code>
-     */
-    public List<com.platform.chorus.db.tables.pojos.ItemValue> fetchByCreator(String... values) {
-        return fetch(ItemValue.ITEM_VALUE.CREATOR, values);
-    }
-
-    /**
-     * Fetch records that have <code>description IN (values)</code>
-     */
-    public List<com.platform.chorus.db.tables.pojos.ItemValue> fetchByDescription(String... values) {
-        return fetch(ItemValue.ITEM_VALUE.DESCRIPTION, values);
+    public List<com.platform.chorus.db.tables.pojos.ItemValue> fetchByValue(String... values) {
+        return fetch(ItemValue.ITEM_VALUE.VALUE, values);
     }
 }
