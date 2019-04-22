@@ -2,23 +2,46 @@
   "schema": {
     "model": ["domain", "name", "extend", "label", "modifier", "scope", "description"],
     "collector": ["name", "result", "injects", "argument", "description"],
-    "field": ["owner", "name", "type", "label", "unit", "range", "default", "format", "optional", "configurable", "collectible", "collector", "interval", "description"]
+    "field": ["owner", "name", "type", "label", "relationship", "unit", "range", "default", "format", "unique", "optional", "visible", "configurable", "collectible", "collector", "interval", "description"]
   },
   "models": [
     ["chorus", "IP", "", "IP地址", "", "", ""],
-    ["chorus", "Account", "", "账号", "", "", ""],
-    ["chorus", "Address", "", "地址", "", "", ""],
-    ["chorus", "HostAddress", "chorus.Address", "主机地址", "", "", ""],
-    ["chorus", "Parameter", "", "参数", "", "", ""],
-    ["chorus", "TelnetParameter", "chorus.Parameter", "Telnet参数", "", "", ""],
-    ["chorus", "Host", "", "主机", "", "", ""],
-    ["chorus", "LinuxServer", "chorus.Host", "Linux主机", "", "", ""]
+    ["chorus", "SNMPParameter", "", "SNMP参数", "", "", ""],
+    ["chorus", "WMIParameter", "", "WMI参数", "", "", ""],
+    ["chorus.host", "Windows", "", "Linux主机", "", "", ""],
+    ["chorus.host.windows", "BasicInfo", ""],
+    ["chorus.host", "CPU"]
   ],
   "collector": [
-    ["getSNMPRWTest", "SNMPRWTest", [], "argument", "description"],
+    ["windowsBasicInfo", "chorus.host.windows.BasicInfo", ["chorus.IP", "chorus.SNMPParameter"], "", "description"],
+    ["CPU", "integer", ["chorus.IP", "chorus.SNMPParameter", "chorus.WMIParameter"], "", "description"],
     ["name", "result", "injects", "argument", "description"]
   ],
   "field": [
-
+    ["chorus.IP", "ip", "string", "ip地址", "own", "", "", "", "", true, false, true, true, false, "", 0, ""],
+    ["chorus.SNMPParameter", "port", "integer", "SNMP端口", "own", "", "", "", "", false, false, true, true, false, "", 0, ""],
+    ["chorus.SNMPParameter", "timeout", "integer", "SNMP超时", "own", "", "", "", "", false, false, true, true, false, "", 0, ""],
+    ["chorus.SNMPParameter", "retries", "integer", "重试次数", "own", "", "", "", "", false, false, true, true, false, "", 0, ""],
+    ["chorus.SNMPParameter", "Version_Get", "integer", "Snmp版本（GET）", "own", "", "", "", "", false, false, true, true, false, "", 0, ""],
+    ["chorus.SNMPParameter", "Community_Get", "integer", "共同体名（GET）", "own", "", "", "", "", false, false, true, true, false, "", 0, ""],
+    ["chorus.SNMPParameter", "SecurityName_Get", "integer", "SNMPV3用户（GET）", "own", "", "", "", "", false, false, true, true, false, "", 0, ""],
+    ["chorus.SNMPParameter", "AuthPassword_Get", "integer", "SNMPV3验证密码（GET）", "own", "", "", "", "", false, false, true, true, false, "", 0, ""],
+    ["chorus.SNMPParameter", "PrivPassword_Get", "integer", "SNMPV3加密密码（GET）", "own", "", "", "", "", false, false, true, true, false, "", 0, ""],
+    ["chorus.SNMPParameter", "Version_Set", "integer", "Snmp版本（SET）", "own", "", "", "", "", false, false, true, true, false, "", 0, ""],
+    ["chorus.SNMPParameter", "Community_Set", "integer", "共同体名（SET）", "own", "", "", "", "", false, false, true, true, false, "", 0, ""],
+    ["chorus.SNMPParameter", "SecurityName_Set", "integer", "SNMPV3用户（SET）", "own", "", "", "", "", false, false, true, true, false, "", 0, ""],
+    ["chorus.SNMPParameter", "AuthPassword_Set", "integer", "SNMPV3验证密码（SET）", "own", "", "", "", "", false, false, true, true, false, "", 0, ""],
+    ["chorus.SNMPParameter", "PrivPassword_Set", "integer", "SNMPV3加密密码（SET）", "own", "", "", "", "", false, false, true, true, false, "", 0, ""],
+    ["chorus.host.CPU", "cpu_load", "integer", "负载值", "own", "%", "[0,100]", "", "", false, false, false, false, true, "", 0, ""],
+    ["chorus.host.Windows", "CPU", "chorus.host.CPU", "CPU负载", "own", "", "", "", "", false, false, false, false, true, "CPU", 0, ""],
+    ["chorus.host.Windows", "BasicInfo", "chorus.host.windows.BasicInfo", "基础信息", "own", "", "", "", "", false, false, false, false, true, "windowsBasicInfo", 0, ""],
+    ["chorus.host.windows.BasicInfo", "Descr", "string", "版本描述", "own", "", "", "", "", false, false, false, false, true, "windowsBasicInfo", 0, ""],
+    ["chorus.host.windows.BasicInfo", "Oid", "string", "系统OID", "own", "", "", "", "", false, false, false, false, true, "", 0, ""],
+    ["chorus.host.windows.BasicInfo", "Name", "string", "系统名称", "own", "", "", "", "", false, false, false, false, true, "", 0, ""],
+    ["chorus.host.windows.BasicInfo", "Contact", "string", "联系人", "own", "", "", "", "", false, false, false, false, true, "", 0, ""],
+    ["chorus.host.windows.BasicInfo", "Location", "string", "安装位置", "own", "", "", "", "", false, false, false, false, true, "", 0, ""],
+    ["chorus.host.windows.BasicInfo", "UpTime", "long", "连续运行时间", "own", "", "", "", "", false, false, false, false, true, "", 0, ""],
+    ["chorus.host.windows.BasicInfo", "VersionDescr", "string", "详细版本信息", "own", "", "", "", "", false, false, false, false, true, "", 0, ""],
+    ["chorus.host.windows.BasicInfo", "IPList", "string", "IP列表", "own", "", "", "", "", false, false, false, false, true, "", 0, ""]
   ]
 }

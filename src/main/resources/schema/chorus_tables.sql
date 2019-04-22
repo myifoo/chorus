@@ -26,11 +26,14 @@ CREATE TABLE public.field_model
     name character varying(50) NOT NULL,                -- field name
     type character varying(200) NOT NULL,               -- this field's type domain + type name
     label character varying(20),
+    relationship character varing(20),                  -- relationship to owner
     unit character varying(10),
     range character varying(100),
-    "default" character varying(100),                  -- default value
+    "default" character varying(100),                   -- default value
     format character varying(100),
+    "unique" boolean DEFAULT false,
     optional boolean DEFAULT true,
+    visible boolean DEFAULT false,                      -- visible in table list
     configurable boolean DEFAULT true,
     collectible boolean DEFAULT false,
     collector character varying(100),
