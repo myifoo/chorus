@@ -64,15 +64,15 @@ public class PgsqlSchemaTool {
                 System.out.println(e.getMessage());
             }
 
-            System.out.println("now, start to create db ...");
+            System.out.println("now, start to createClass db ...");
             dsl.execute(String.format("CREATE DATABASE %s OWNER %s;", name, user)); // todo
             System.out.println("Create DB done!");
         } catch (Exception e) {
-            System.out.println(String.format("create db failed : %s", e.getMessage()));
+            System.out.println(String.format("createClass db failed : %s", e.getMessage()));
         }
 
         try (DSLContext dsl = DSL.using(DriverManager.getConnection(String.format("jdbc:postgresql://%s:%s/%s", ip, port, name), user, password), SQLDialect.POSTGRES)) {
-            System.out.println("Start to create tables ...");
+            System.out.println("Start to createClass tables ...");
             Resource resource = new PathMatchingResourcePatternResolver().getResource("classpath:schema/chorus_tables.sql");
             BufferedReader reader = new BufferedReader(new FileReader(resource.getFile()));//new File("src/main/resources/schema/ailysis.sql")
             String sql = reader.lines()
@@ -85,7 +85,7 @@ public class PgsqlSchemaTool {
 
             System.out.println("Create tables done!");
         } catch (Exception e) {
-            System.out.println(String.format("create tables failed : %s", e.getClass().getSimpleName()));
+            System.out.println(String.format("createClass tables failed : %s", e.getClass().getSimpleName()));
         }
     }
 }

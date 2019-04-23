@@ -21,7 +21,7 @@ public class GraphTemplate {
     Driver driver;
 
     public void run(String clause) {
-        logger.debug("create graph : {}", clause);
+        logger.debug("createClass graph : {}", clause);
         try (Session session = driver.session()) {
             session.writeTransaction((t)->t.run(clause));
         }
@@ -35,7 +35,7 @@ public class GraphTemplate {
     }
 
     public void run(String clause, Value value) {
-        logger.debug("create graph : {}", clause);
+        logger.debug("createClass graph : {}", clause);
         try (Session session = driver.session()) {
             session.writeTransaction((t)->t.run(clause,
                     parameters("message", value)));
@@ -43,7 +43,7 @@ public class GraphTemplate {
     }
 
     public void run(String clause, Map<String, Object> parameters) {
-        logger.debug("create graph : {}", clause);
+        logger.debug("createClass graph : {}", clause);
         try (Session session = driver.session()) {
             session.writeTransaction((t)->t.run(clause,
                     parameters));

@@ -1,0 +1,226 @@
+{
+  "model": {
+    "domain": {
+      "type": "string",
+      "maxLength": 200,
+      "description": "可以看成类所在包的路径，类似于 Java 的 package"
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 50,
+      "description": "类名称, package.name 应该全局唯一"
+    },
+    "extend": {
+      "type": "string",
+      "maxLength": 200,
+      "description": "父类名称，目前只支持单继承"
+    },
+    "label": {
+      "type": "string",
+      "maxLength": 20,
+      "description": "可作为显示名称，或者简称，昵称来使用"
+    },
+    "modifier": {
+      "type": "enum",
+      "maxLength": 20,
+      "range": ["public", "private", "final", "abstract"],
+      "description": "暂时用不到，预留着"
+    },
+    "scope": {
+      "type": "enum",
+      "maxLength": 20,
+      "range": ["global", "package"],
+      "description": "暂时用不到，预留着"
+    },
+    "description": {
+      "type": "string",
+      "description": "类型描述"
+    }
+  },
+  "collector": {
+    "name": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "采集函数的名称，全局唯一"
+    },
+    "result": {
+      "type": "string",
+      "maxLength": 200,
+      "description": "返回结果的类型，domain + name"
+    },
+    "injects": {
+      "type": "list",
+      "item": {
+        "type": "string",
+        "description": "类型：domain + name"
+      },
+      "description": "注入参数，参数形式为对象，而不是具体的值"
+    },
+    "argument": {
+      "type": "json",
+      "description": "动态参数，值为原生类型：integer, string, long, float, double, 等，在调用函数时，动态添加的参数，与对象无关"
+    },
+    "description": {
+      "type": "string",
+      "description": ""
+    }
+  },
+  "field": {
+    "owner": {
+      "type": "string",
+      "maxLength": 200,
+      "description": "字段所属的类：model domain + model name"
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 50,
+      "description": "字段名称"
+    },
+    "type": {
+      "type": "string",
+      "maxLength": 200,
+      "description": "字段类型： 原生类型 = [string, integer, long, float, double], 自定义类型 = model domain + model name"
+    },
+    "label": {
+      "type": "string",
+      "maxLength": 20,
+      "description": "字段标签，可看做显示名称"
+    },
+    "relationship": {
+      "type": "string",
+      "maxLength": 20,
+      "description": "与 owner 的关系类型，默认为 own，可通过该字段定制关系名称"
+    },
+    "unit": {
+      "type": "string",
+      "maxLength": 10,
+      "description": "字段单位"
+    },
+    "range": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "取值范围，一般用来限制数值的范围"
+    },
+    "default": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "默认取值"
+    },
+    "format": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "字段值的格式，一般为正则表达式，用来多输入信息做校验，比如 ip 地址，邮箱地址，名称等"
+    },
+    "unique": {
+      "type": "boolean",
+      "default": false,
+      "description": "唯一性约束，类型中所有的对象，该字段唯一"
+    },
+    "optional": {
+      "type": "boolean",
+      "default": true,
+      "description": "是否为可选字段，当为 false 时，创建对象时该字段必填"
+    },
+    "visible": {
+      "type": "boolean",
+      "default": false,
+      "description": "是否可见，当对象以列表形式展现时，只显示 visible 为 true 的字段信息"
+    },
+    "configurable": {
+      "type": "boolean",
+      "default": true,
+      "description": "是否可配置，标志该字段所对应的对象属性为配置属性，否则为采集属性"
+    },
+    "collectible": {
+      "type": "boolean",
+      "default": false,
+      "description": "是否可采集，标志该字段对应的对象属性为采集属性"
+    },
+    "collector": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "采集函数的名称"
+    },
+    "interval": {
+      "type": "integer",
+      "default": 0,
+      "description": "采集函数的调度间隔(秒数)，-1: 表示被动执行，值应不小于 60 秒"
+    },
+    "description": {
+      "type": "string",
+      "description": "字段的详细描述"
+    }
+  },
+  "entity": {
+    "name": {
+      "type": "string",
+      "maxLength": 50,
+      "description":  "对象名称"
+    },
+    "type": {
+      "type": "string",
+      "maxLength": 200,
+      "description":  "对象类型： domain + name"
+    },
+    "creator": {
+      "type": "string",
+      "maxLength": 50,
+      "description":  "对象创建人"
+    },
+    "tags": {
+      "type": "list",
+      "item": {
+        "type": "string",
+        "maxLength": 20
+      },
+      "description":  "对象标签"
+    },
+    "contains": {
+      "type": "list",
+      "item": {
+        "type": "integer"
+      },
+      "description": "包含的子对象的 id 列表"
+    },
+    "description":{
+      "type": "string",
+      "description": "对象的详细描述"
+    }
+  },
+  "value": {
+    "owner": {
+      "type": "integer",
+      "description": "该值所属的对象 id"
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 50,
+      "description": "对象值对应的字段名称，field name"
+    },
+    "type": {
+      "type": "string",
+      "maxLength": 10,
+      "description": "字段类型： 只能是原生类型 [boolean, integer, long, string, float, double]"
+    },
+    "value": {
+      "type": "string",
+      "description": "值对应的字符串，如 true, 1, 1.1, 等"
+    }
+  },
+  "relation": {
+    "name": {
+      "type":"string",
+      "maxLength": 20,
+      "description": "关系名称"
+    },
+    "creator": {
+      "type": "string",
+      "maxLength": 20,
+      "description": "创建人"
+    },
+    "description": {
+      "type": "string",
+      "description": "关系的详细描述"
+    }
+  }
+}

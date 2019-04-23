@@ -10,8 +10,10 @@ import java.util.List;
  */
 public interface CollectorService {
     Integer create(Collector collector);
+    List<Integer> create(List<Collector> collectors);
     Collector fetch(Integer id);
     List<Collector> fetchAll();
+    String getHtml();
     List<Collector> fetchByResult(String result);
     void delete(Integer id);
     void delete(String name);

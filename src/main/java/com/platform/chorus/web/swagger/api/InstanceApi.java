@@ -23,7 +23,7 @@ import java.util.List;
 @Api(value = "instance", description = "the instance API")
 public interface InstanceApi {
 
-    @ApiOperation(value = "create instance", nickname = "createInstance", notes = "create instance", response = Object.class, tags={ "instance", })
+    @ApiOperation(value = "createClass instance", nickname = "createInstance", notes = "createClass instance", response = Object.class, tags={ "instance", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "return class list", response = Object.class),
         @ApiResponse(code = 500, message = "System internal error", response = ErrorResponseBody.class) })

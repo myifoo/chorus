@@ -4,12 +4,10 @@ import com.platform.chorus.cim.model.CIModelService;
 import com.platform.chorus.db.services.ClassModelService;
 import com.platform.chorus.db.tables.pojos.ClassModel;
 import com.platform.chorus.db.tables.pojos.FieldModel;
-import net.bytebuddy.asm.Advice;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.neo4j.driver.v1.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -83,10 +81,10 @@ public class ChorusServerApplicationTests {
 		car.setDomain("chorus");
 		car.setName("Car");
 
-		ciModelService.create(person);
-		ciModelService.create(student);
-		ciModelService.create(teacher);
-		ciModelService.create(car);
+		ciModelService.createClass(person);
+		ciModelService.createClass(student);
+		ciModelService.createClass(teacher);
+		ciModelService.createClass(car);
 	}
 
 	@Test
@@ -96,7 +94,7 @@ public class ChorusServerApplicationTests {
 		pupil.setName("Pupil");
 		pupil.setExtend("chorus.Student");
 
-		ciModelService.create(pupil);
+		ciModelService.createClass(pupil);
 
 		FieldModel school = getField("string", "chorus.Pupil", "school", "学校名称");
 		FieldModel hobby = getField("string", "chorus.Pupil", "hobby", "爱好");

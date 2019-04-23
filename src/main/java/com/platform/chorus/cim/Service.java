@@ -13,25 +13,13 @@ public interface Service {
     String CONTAIN = "contain";     // item entity contain item entity
     String RETURN = "return";       // collector return data type
     String REQUIRE = "require";     // collector require data type
+    String COLLECT = "collect";     // collector require data type
 
     default String buildCommonId(String path) {
         return String.join(":", path.split("\\."));
     }
 
-    default String buildClassNodeId(String domain, String name) {
-        return String.format("%s:%s:%s", "class", buildCommonId(domain), name);
-    }
-
     default String buildClassNodeId(String classPath) {
         return String.format("%s:%s", "class", buildCommonId(classPath));
-    }
-
-    default String buildFieldNodeId(String owner, String name) {
-
-        return String.format("%s:%s:%s", "field", buildCommonId(owner), name);
-    }
-
-    default String buildItemNodeId(String type, String name) {
-        return String.format("%s:%s:%s", "item", buildCommonId(type), name);
     }
 }

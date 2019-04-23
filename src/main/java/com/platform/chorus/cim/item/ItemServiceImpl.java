@@ -35,7 +35,7 @@ public class ItemServiceImpl implements ItemService {
         try {
             entityService.createItemEntity(entity);
         } catch (Exception e) {
-            logger.error("create item entity failed: {}, {}", e.getClass().getSimpleName(), e.getMessage());
+            logger.error("createClass item entity failed: {}, {}", e.getClass().getSimpleName(), e.getMessage());
         }
 
         createItemNodeRelation(entity);
@@ -64,7 +64,7 @@ public class ItemServiceImpl implements ItemService {
 
             template.createRelation(buildClassNodeId(entity.getType()), itemId, INSTANCE);
         } catch (Exception e) {
-            logger.error("create item node and relation failed: {}, {}", e.getClass().getSimpleName(), e.getMessage());
+            logger.error("createClass item node and relation failed: {}, {}", e.getClass().getSimpleName(), e.getMessage());
         }
 
         try {
@@ -87,5 +87,9 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<ItemValue> createItemValue(List<ItemValue> values) {
         return valueService.createItemValue(values);
+    }
+
+    private String buildItemNodeId(String type, String name) {
+        return String.format("%s:%s:%s", "item", buildCommonId(type), name);
     }
 }

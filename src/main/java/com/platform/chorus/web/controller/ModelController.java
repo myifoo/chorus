@@ -1,7 +1,9 @@
 package com.platform.chorus.web.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.platform.chorus.db.tables.pojos.ClassModel;
 import com.platform.chorus.db.tables.pojos.FieldModel;
+import com.platform.chorus.web.model.SchemaImportModel;
 import com.platform.chorus.web.service.ModelService;
 import com.platform.chorus.web.swagger.model.ErrorResponseBody;
 import com.platform.chorus.web.swagger.model.ResponseBody;
@@ -25,11 +27,28 @@ public class ModelController {
     @Autowired
     ModelService service;
 
+    @RequestMapping(value = "/import", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
+    public ResponseEntity<? extends ResponseBody> modelImport(@RequestBody SchemaImportModel schema) {
+        try {
+            SuccessResponseBody response = new SuccessResponseBody();
+            response.setMessage("createClass single class model success");
+
+            service.create(schema.getClasses());
+            service.createCollectors(schema.getCollectors());
+            service.createField(schema.getFields());
+
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ErrorResponseBody(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), e.getClass().getName()), HttpStatus.NOT_IMPLEMENTED);
+        }
+    }
+
+
     @RequestMapping(value = "/class", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
     public ResponseEntity<? extends ResponseBody> createClass(@RequestBody ClassModel model) {
         try {
             SuccessResponseBody response = new SuccessResponseBody();
-            response.setMessage("create single class model success");
+            response.setMessage("createClass single class model success");
             response.setResult(service.create(model));
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
@@ -41,7 +60,7 @@ public class ModelController {
     public ResponseEntity<? extends ResponseBody> createClass(@RequestBody List<ClassModel> models) {
         try {
             SuccessResponseBody response = new SuccessResponseBody();
-            response.setMessage("create class model success");
+            response.setMessage("createClass class model success");
             response.setResult(service.create(models));
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
@@ -86,7 +105,7 @@ public class ModelController {
     public ResponseEntity<? extends ResponseBody> createField(@RequestBody FieldModel model) {
         try {
             SuccessResponseBody response = new SuccessResponseBody();
-            response.setMessage("create single field model success");
+            response.setMessage("createClass single field model success");
             response.setResult(service.createField(model));
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {

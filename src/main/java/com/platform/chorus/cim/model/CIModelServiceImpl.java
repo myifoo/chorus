@@ -2,8 +2,10 @@ package com.platform.chorus.cim.model;
 
 import com.platform.chorus.db.neo4j.GraphTemplate;
 import com.platform.chorus.db.services.ClassModelService;
+import com.platform.chorus.db.services.CollectorService;
 import com.platform.chorus.db.services.FieldModelService;
 import com.platform.chorus.db.tables.pojos.ClassModel;
+import com.platform.chorus.db.tables.pojos.Collector;
 import com.platform.chorus.db.tables.pojos.FieldModel;
 import org.apache.logging.log4j.util.Strings;
 import org.neo4j.driver.v1.StatementResult;
@@ -26,40 +28,210 @@ public class CIModelServiceImpl implements CIModelService{
     final static String[] PRIMITIVE_TYPES = {"string", "integer", "float", "boolean", "long", "double"};
 
     @Autowired
-    private ClassModelService daoService;
+    private ClassModelService classService;
 
     @Autowired
-    private FieldModelService fieldDaoService;
+    private FieldModelService fieldService;
+
+    @Autowired
+    private CollectorService collectorService;
 
     @Autowired
     private GraphTemplate template;
 
-    public List<Integer> create(List<ClassModel> models) {
+    interface Graph{
+        void create();
+        void delete();
+    }
+
+    class ClassGraph implements Graph{
+        String domain;
+        String name;
+        String extend;
+
+        ClassGraph(String domain, String name) {
+            this.domain = domain;
+            this.name = name;
+        }
+
+        ClassGraph(String domain, String name, String extend) {
+            this.domain = domain;
+            this.name = name;
+            this.extend = extend;
+        }
+
+        @Override
+        public void create() {
+            template.createNode(getId(domain, name),
+                    String.format("{ domain: '%s', name: '%s'}", domain, name));
+
+            if (Strings.isNotEmpty(extend)) {
+                template.createRelation(getId(domain, name),
+                        getId(extend), EXTEND);
+            }
+        }
+
+        @Override
+        public void delete() {
+            String nodeId = getId(domain, name);
+            template.deleteRelation(nodeId);
+            template.deleteNode(nodeId);
+        }
+
+        private String getId(String domain, String name) {
+            return String.format("%s:%s:%s", "class", buildCommonId(domain), name);
+        }
+
+        private String getId(String classPath) {
+            return String.format("%s:%s", "class", buildCommonId(classPath));
+        }
+    }
+
+    class CollectorGraph implements Graph{
+        String name;
+        String result;
+
+        CollectorGraph(String name) {
+            this.name = name;
+        }
+
+        CollectorGraph(String name, String result) {
+            this.name = name;
+            this.result = result;
+        }
+
+        @Override
+        public void create() {
+            String collectorId = getId(name);
+
+            template.createNode(collectorId, String.format("{ result: %s}", result));
+            template.createRelation(collectorId, buildClassNodeId(result), COLLECT);
+        }
+
+        @Override
+        public void delete() {
+            String id = getId(name);
+            template.deleteRelation(id);
+            template.deleteNode(id);
+        }
+
+        private String getId(String name) {
+            return String.format("%s:%s", "collector", name);
+        }
+    }
+
+    class FieldGraph implements Graph{
+        String owner;
+        String name;
+        String type;
+        String label;
+
+        FieldGraph(String owner, String name) {
+            this.owner = owner;
+            this.name = name;
+        }
+
+        FieldGraph(String owner, String name, String type, String label) {
+            this.owner = owner;
+            this.name = name;
+            this.type = type;
+            this.label = label;
+        }
+
+        @Override
+        public void create() {
+            template.createNode(getId(owner, name),
+                    String.format("{ type: '%s', name: '%s', label: '%s'}", type, name, label));
+
+            template.createRelation(
+                    buildClassNodeId(owner),
+                    getId(owner, name),
+                    OWN);
+
+            if (Arrays.stream(PRIMITIVE_TYPES).noneMatch(t -> t.equals(type))) {
+                template.createRelation(
+                        buildClassNodeId(owner),
+                        buildClassNodeId(type),
+                        REFERENCE);
+            }
+        }
+
+        @Override
+        public void delete() {
+            String nodeId = getId(owner, name);
+            template.deleteRelation(nodeId);
+            template.deleteNode(nodeId);
+        }
+
+        private String getId(String owner, String name) {
+            return String.format("%s:%s:%s", "field", buildCommonId(owner), name);
+        }
+    }
+
+
+    @Override
+    public List<ClassModel> getAllClass() {
+        return classService.getAll();
+    }
+
+    @Override
+    public List<FieldModel> getAllField() {
+        return fieldService.getAll();
+    }
+
+    @Override
+    public List<Collector> getAllCollector() {
+        return collectorService.fetchAll();
+    }
+
+    @Override
+    public String getAllClassHtml() {
+        return classService.getHtml();
+    }
+
+    @Override
+    public String getAllFieldHtml() {
+        return fieldService.getHtml();
+    }
+
+    @Override
+    public String getAllCollectorHtml() {
+        return collectorService.getHtml();
+    }
+
+    @Override
+    public List<String> getAllClassFullName() {
+        return classService.getAllFullName();
+    }
+
+    public List<Integer> createClass(List<ClassModel> models) {
         List<Integer> ids;
         try {
-            ids = daoService.save(models);
+            ids = classService.save(models);
         } catch (Exception e) {
-            logger.error("create class model failed: {}, {}", e.getClass().getSimpleName(), e.getMessage());
+            logger.error("createClass class model failed: {}, {}", e.getClass().getSimpleName(), e.getMessage());
             return new ArrayList<>();
         }
 
-        models.forEach(this::createClassGraphNode);
+        models.forEach(m->
+            new ClassGraph(m.getDomain(), m.getName(), m.getExtend()).create()
+        );
         return ids;
     }
 
-    public Integer create(ClassModel model) {
+    public Integer createClass(ClassModel model) {
         Integer id;
         try {
-            id = daoService.save(model);
+            id = classService.save(model);
         } catch (Exception e) {
-            logger.error("create class model failed: {}, {}", e.getClass().getSimpleName(), e.getMessage());
+            logger.error("createClass class model failed: {}, {}", e.getClass().getSimpleName(), e.getMessage());
             return -1;
         }
 
         try {
-            createClassGraphNode(model);
+            new ClassGraph(model.getDomain(), model.getName(), model.getExtend()).create();
         } catch (Exception e) {
-            logger.error("create class graph node failed: {}, {}", e.getClass().getSimpleName(), e.getMessage());
+            logger.error("createClass class graph node failed: {}, {}", e.getClass().getSimpleName(), e.getMessage());
         }
         return id;
     }
@@ -67,32 +239,56 @@ public class CIModelServiceImpl implements CIModelService{
     @Override
     public void deleteClass(String domain, String name) {
         try {
-            daoService.delete(domain, name);
+            classService.delete(domain, name);
         } catch (Exception e) {
             logger.error("delete class model failed: {}, {}", e.getClass().getSimpleName(), e.getMessage());
             return;
         }
 
         try {
-            deleteClassGraphNode(domain, name);
+            new ClassGraph(domain, name).delete();
         } catch (Exception e) {
             logger.error("delete class graph node failed: {}, {}", e.getClass().getSimpleName(), e.getMessage());
         }
     }
 
+    @Override
+    public Integer createCollector(Collector collector) {
+        collectorService.create(collector);
+        new CollectorGraph(collector.getName(), collector.getResult()).create();
+
+        return collector.getId();
+    }
+
+    @Override
+    public List<Integer> createCollector(List<Collector> collectors) {
+        collectorService.create(collectors);
+        collectors.forEach(c->
+            new CollectorGraph(c.getName(), c.getResult()).create()
+        );
+
+        return collectors.stream().map(Collector::getId).collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteCollector(String name) {
+        collectorService.delete(name);
+        new CollectorGraph(name).delete();
+    }
+
     public Integer createField(FieldModel model) {
         Integer fid;
         try {
-            fid = fieldDaoService.save(model);
+            fid = fieldService.save(model);
         } catch (Exception e) {
-            logger.error("create field model failed: {}, {}", e.getClass().getSimpleName(), e.getMessage());
+            logger.error("createClass field model failed: {}, {}", e.getClass().getSimpleName(), e.getMessage());
             return -1;
         }
 
         try {
-            createFieldGraphNode(model);
+            new FieldGraph(model.getOwner(), model.getName(), model.getType(), model.getLabel()).create();
         } catch (Exception e) {
-            logger.error("create field graph node failed: {}, {}", e.getClass().getSimpleName(), e.getMessage());
+            logger.error("createClass field graph node failed: {}, {}", e.getClass().getSimpleName(), e.getMessage());
         }
         return fid;
     }
@@ -100,76 +296,42 @@ public class CIModelServiceImpl implements CIModelService{
     @Override
     public void deleteField(String owner, String name) {
         try {
-            fieldDaoService.delete(owner, name);
+            fieldService.delete(owner, name);
         } catch (Exception e) {
             logger.error("delete field failed: {}.{}", owner, name);
         }
 
-        deleteFieldGraphNode(owner, name);
+        new FieldGraph(owner, name).delete();
     }
 
     @Override
     public List<Integer> createField(List<FieldModel> models) {
         List<Integer> ids;
         try {
-            ids = fieldDaoService.save(models);
+            ids = fieldService.save(models);
         } catch (Exception e) {
-            logger.error("create field model failed: {}, {}", e.getClass().getSimpleName(), e.getMessage());
+            logger.error("createClass field model failed: {}, {}", e.getClass().getSimpleName(), e.getMessage());
             return new ArrayList<>();
         }
 
-        models.forEach(this::createFieldGraphNode);
+        models.forEach(f->
+                new FieldGraph(f.getOwner(), f.getName(), f.getType(), f.getLabel()).create()
+        );
         return ids;
     }
 
-    @Override
-    public List<FieldModel> getFieldByOwner(String owner) {
-        StatementResult result = template.query(String.format("match (a:%s)-[r:%s|%s *1..5]->(b) return b.domain, b.name", buildClassNodeId(owner), EXTEND, REFERENCE));
+    /**
+     *  get all field of specific class, its full name is class domain plus class name;
+     *
+     * @param classFullName equals domain.name
+     * @return FieldModel List
+     */
+    public List<FieldModel> getFields(String classFullName) {
+        StatementResult result = template.query(String.format("match (a:%s)-[r:%s|%s *1..5]->(b) return b.domain, b.name", buildClassNodeId(classFullName), EXTEND, REFERENCE));
 
-        List<String> owners = result.stream().map(r -> r.get(0).asString() + "." + r.get(1).asString()).collect(Collectors.toList());
-        owners.add(owner);
+        List<String> classes = result.stream().map(r -> r.get(0).asString() + "." + r.get(1).asString()).collect(Collectors.toList());
+        classes.add(classFullName);
 
-        return fieldDaoService.getByOwners(owners.toArray(new String[0]));
+        return fieldService.getByOwners(classes.toArray(new String[0]));
     }
-
-    private void createClassGraphNode(ClassModel model) {
-        template.createNode(buildClassNodeId(model.getDomain(), model.getName()),
-                String.format("{ domain: '%s', name: '%s'}", model.getDomain(), model.getName()));
-
-        String parent = model.getExtend();
-        if (Strings.isNotEmpty(parent)) {
-            template.createRelation(buildClassNodeId(model.getDomain(), model.getName()),
-                    buildClassNodeId(model.getExtend()), EXTEND);
-        }
-    }
-
-    private void createFieldGraphNode(FieldModel model) {
-        template.createNode(buildFieldNodeId(model.getOwner(), model.getName()),
-                String.format("{ type: '%s', name: '%s', label: '%s'}", model.getType(), model.getName(), model.getLabel()));
-
-        template.createRelation(
-                buildClassNodeId(model.getOwner()),
-                buildFieldNodeId(model.getOwner(), model.getName()),
-                OWN);
-
-        if (Arrays.stream(PRIMITIVE_TYPES).noneMatch(t -> t.equals(model.getType()))) {
-            template.createRelation(
-                    buildClassNodeId(model.getOwner()),
-                    buildClassNodeId(model.getType()),
-                    REFERENCE);
-        }
-    }
-
-    private void deleteClassGraphNode(String domain, String name) {
-        template.deleteRelation(buildClassNodeId(domain,name));
-        template.deleteNode(buildClassNodeId(domain,name));
-    }
-
-    private void deleteFieldGraphNode(String owner, String name) {
-        template.deleteRelation(buildFieldNodeId(owner, name));
-        template.deleteNode(buildFieldNodeId(owner, name));
-    }
-
-
-
 }

@@ -16,7 +16,7 @@ public class FieldModelTests {
 
     @Test
     public void getByOwnerTest() {
-        service.getFieldByOwner("chorus.Pupil").forEach(System.out::println);
+        service.getFields("chorus.Pupil").forEach(System.out::println);
     }
 
 

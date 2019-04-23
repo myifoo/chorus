@@ -1,9 +1,4 @@
 {
-  "schema": {
-    "model": ["domain", "name", "extend", "label", "modifier", "scope", "description"],
-    "collector": ["name", "result", "injects", "argument", "description"],
-    "field": ["owner", "name", "type", "label", "relationship", "unit", "range", "default", "format", "unique", "optional", "visible", "configurable", "collectible", "collector", "interval", "description"]
-  },
   "models": [
     ["chorus", "IP", "", "IP地址", "", "", ""],
     ["chorus", "SNMPParameter", "", "SNMP参数", "", "", ""],

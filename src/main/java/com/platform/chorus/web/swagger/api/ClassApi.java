@@ -23,7 +23,7 @@ import java.util.List;
 @Api(value = "class", description = "the class API")
 public interface ClassApi {
 
-    @ApiOperation(value = "create new meta class", nickname = "createMetaClass", notes = "create new meta class", response = Object.class, tags={ "meta-class", })
+    @ApiOperation(value = "createClass new meta class", nickname = "createMetaClass", notes = "createClass new meta class", response = Object.class, tags={ "meta-class", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "return class cid", response = Object.class),
         @ApiResponse(code = 500, message = "System internal error", response = ErrorResponseBody.class) })
@@ -34,7 +34,7 @@ public interface ClassApi {
     ResponseEntity<Object> createMetaClass(@ApiParam(value = "class array" ,required=true )  @Valid @RequestBody ClassMeta body);
 
 
-    @ApiOperation(value = "create new meta class", nickname = "createMetaClasses", notes = "create new meta class", response = SuccessResponseBody.class, tags={ "meta-class", })
+    @ApiOperation(value = "createClass new meta class", nickname = "createMetaClasses", notes = "createClass new meta class", response = SuccessResponseBody.class, tags={ "meta-class", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "return success", response = SuccessResponseBody.class),
         @ApiResponse(code = 500, message = "System internal error", response = ErrorResponseBody.class) })

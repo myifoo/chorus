@@ -10,14 +10,17 @@ import org.jooq.Record;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.platform.chorus.db.tables.Collector.COLLECTOR;
 
 /**
  * Create by A.T on 2019/4/21
  */
+@Repository
 public class CollectorServiceImpl implements CollectorService {
     final static private Logger logger = LoggerFactory.getLogger(CollectorService.class);
 
@@ -37,6 +40,12 @@ public class CollectorServiceImpl implements CollectorService {
     }
 
     @Override
+    public List<Integer> create(List<Collector> collectors) {
+        dao.insert(collectors);
+        return collectors.stream().map(Collector::getId).collect(Collectors.toList());
+    }
+
+    @Override
     public Collector fetch(Integer id) {
         return dao.fetchOneById(id);
     }
@@ -44,6 +53,11 @@ public class CollectorServiceImpl implements CollectorService {
     @Override
     public List<Collector> fetchAll() {
         return dao.findAll();
+    }
+
+    @Override
+    public String getHtml() {
+        return dsl.select().from(COLLECTOR).fetch().formatHTML();
     }
 
     @Override
