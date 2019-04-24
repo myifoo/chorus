@@ -73,7 +73,6 @@ CREATE TABLE public.item_value
     name character varying(50),
     type character varying(50),                         -- primitive type: integer, long, float, double, boolean, string, list
     value text,
-    CONSTRAINT iv_u_key UNIQUE (owner, name)
 );
 
 CREATE TABLE public.relation

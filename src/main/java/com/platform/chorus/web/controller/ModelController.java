@@ -33,8 +33,10 @@ public class ModelController {
             SuccessResponseBody response = new SuccessResponseBody();
             response.setMessage("createClass single class model success");
 
-            service.create(schema.getClasses());
-            service.createCollectors(schema.getCollectors());
+            service.validate(schema);
+
+            service.createClass(schema.getClasses());
+            service.createCollector(schema.getCollectors());
             service.createField(schema.getFields());
 
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -49,7 +51,7 @@ public class ModelController {
         try {
             SuccessResponseBody response = new SuccessResponseBody();
             response.setMessage("createClass single class model success");
-            response.setResult(service.create(model));
+            response.setResult(service.createClass(model));
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new ErrorResponseBody(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), e.getClass().getName()), HttpStatus.NOT_IMPLEMENTED);
@@ -61,7 +63,7 @@ public class ModelController {
         try {
             SuccessResponseBody response = new SuccessResponseBody();
             response.setMessage("createClass class model success");
-            response.setResult(service.create(models));
+            response.setResult(service.createClass(models));
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new ErrorResponseBody(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), e.getClass().getName()), HttpStatus.NOT_IMPLEMENTED);
@@ -98,6 +100,15 @@ public class ModelController {
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new ErrorResponseBody(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), e.getClass().getName()), HttpStatus.NOT_IMPLEMENTED);
+        }
+    }
+
+    @RequestMapping(value = "/collectors/html", produces = "text/html", method = RequestMethod.GET)
+    public String getAllCollectorHtml() {
+        try {
+            return service.getClassHtml();
+        } catch (Exception e) {
+            return "ERROR";
         }
     }
 
