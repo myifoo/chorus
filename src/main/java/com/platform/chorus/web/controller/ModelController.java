@@ -1,5 +1,6 @@
 package com.platform.chorus.web.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.platform.chorus.db.tables.pojos.ClassModel;
 import com.platform.chorus.db.tables.pojos.FieldModel;
@@ -28,8 +29,9 @@ public class ModelController {
     ModelService service;
 
     @RequestMapping(value = "/import", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
-    public ResponseEntity<? extends ResponseBody> modelImport(@RequestBody SchemaImportModel schema) {
+    public ResponseEntity<? extends ResponseBody> modelImport(String json) {
         try {
+            SchemaImportModel schema = JSONObject.parseObject(json, SchemaImportModel.class);
             SuccessResponseBody response = new SuccessResponseBody();
             response.setMessage("createClass single class model success");
 
